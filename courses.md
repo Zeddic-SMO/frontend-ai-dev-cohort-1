@@ -6,7 +6,7 @@
 
 ## Master Sessions
 
-Master sessions are standalone deep-dives delivered to the full cohort, regardless of track. Every learner attends. They cover foundational knowledge that underpins every course in the program.
+Master sessions are standalone deep-dives delivered to the full cohort regardless of track. Every learner attends. They cover foundational knowledge that underpins every course in the program.
 
 ---
 

@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1150" viewBox="0 0 800 1150">
+  <defs>
+    <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e0a38;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0b1f;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="heroGlow" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.28" />
+      <stop offset="100%" style="stop-color:#0d0b1f;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#111827;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1117;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="footerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e0a38;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f0c29;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Body background -->
+  <rect width="800" height="1150" fill="url(#bodyBg)" />
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <rect x="0" y="0" width="800" height="285" fill="url(#heroBg)" />
+  <rect x="0" y="0" width="800" height="285" fill="url(#heroGlow)" />
+
+  <!-- Decorative circles -->
+  <circle cx="720" cy="-30" r="200" fill="#7c3aed" fill-opacity="0.08" />
+  <circle cx="70"  cy="310" r="160" fill="#4f46e5" fill-opacity="0.06" />
+  <circle cx="760" cy="260" r="80"  fill="#a855f7" fill-opacity="0.05" />
+
+  <!-- Cohort badge -->
+  <rect x="300" y="36" width="200" height="30" rx="15" fill="url(#purple)" fill-opacity="0.75" />
+  <text x="400" y="57" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="3">COHORT · 01</text>
+
+  <!-- Program title -->
+  <text x="400" y="150" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="90" fill="#ffffff" text-anchor="middle" font-weight="900" letter-spacing="-2">FRONTEND</text>
+  <text x="400" y="193" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="26" fill="#a78bfa" text-anchor="middle" font-weight="600" letter-spacing="8">DEVELOPMENT PROGRAM</text>
+
+  <!-- Divider -->
+  <line x1="290" y1="213" x2="510" y2="213" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="1" />
+
+  <!-- Start date -->
+  <text x="400" y="246" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#c4b5fd" text-anchor="middle" font-weight="500" letter-spacing="3">STARTS</text>
+  <text x="400" y="278" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="32" fill="#f59e0b" text-anchor="middle" font-weight="800" letter-spacing="2">30 MAY 2026</text>
+
+  <!-- ═══════════════ INTRO BAR ═══════════════ -->
+  <rect x="0" y="285" width="800" height="62" fill="#1e1b4b" />
+  <text x="400" y="321" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="14" fill="#c4b5fd" text-anchor="middle" font-weight="400">A structured, project-based program — from web fundamentals to AI-powered applications.</text>
+
+  <!-- ═══════════════ CURRICULUM ═══════════════ -->
+
+  <!-- Section header -->
+  <text x="60" y="380" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#7c3aed" font-weight="700" letter-spacing="4">CURRICULUM</text>
+  <line x1="60" y1="390" x2="740" y2="390" stroke="#1f2937" stroke-width="1" />
+
+  <!-- ─── Track 1: Web Fundamentals ─── -->
+  <rect x="60" y="402" width="164" height="22" rx="11" fill="#7c3aed" fill-opacity="0.18" />
+  <text x="142" y="418" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#a78bfa" text-anchor="middle" font-weight="700" letter-spacing="1.5">WEB FUNDAMENTALS</text>
+
+  <!-- Course 01: HTML -->
+  <rect x="60" y="434" width="680" height="54" rx="8" fill="#ffffff" fill-opacity="0.025" />
+  <rect x="60" y="434" width="4"   height="54" rx="2" fill="#E44D26" />
+  <text x="84" y="454" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1">COURSE 01</text>
+  <text x="84" y="474" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="16" fill="#f1f5f9" font-weight="700">HTML — Structure &amp; Semantics</text>
+  <text x="730" y="462" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#4b5563" text-anchor="end">4 modules · 14 lessons</text>
+
+  <!-- Course 02: CSS -->
+  <rect x="60" y="496" width="680" height="54" rx="8" fill="#ffffff" fill-opacity="0.025" />
+  <rect x="60" y="496" width="4"   height="54" rx="2" fill="#264DE4" />
+  <text x="84" y="516" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1">COURSE 02</text>
+  <text x="84" y="536" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="16" fill="#f1f5f9" font-weight="700">CSS — Styling &amp; Layout</text>
+  <text x="730" y="524" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#4b5563" text-anchor="end">4 modules · 14 lessons</text>
+
+  <!-- Course 03: JavaScript -->
+  <rect x="60" y="558" width="680" height="54" rx="8" fill="#ffffff" fill-opacity="0.025" />
+  <rect x="60" y="558" width="4"   height="54" rx="2" fill="#F7DF1E" />
+  <text x="84" y="578" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1">COURSE 03</text>
+  <text x="84" y="598" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="16" fill="#f1f5f9" font-weight="700">JavaScript — Interactivity &amp; Async</text>
+  <text x="730" y="586" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#4b5563" text-anchor="end">4 modules · 14 lessons</text>
+
+  <!-- Course 04: Git & GitHub -->
+  <rect x="60" y="620" width="680" height="54" rx="8" fill="#ffffff" fill-opacity="0.025" />
+  <rect x="60" y="620" width="4"   height="54" rx="2" fill="#F05032" />
+  <text x="84" y="640" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1">COURSE 04</text>
+  <text x="84" y="660" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="16" fill="#f1f5f9" font-weight="700">Git &amp; GitHub — Version Control</text>
+  <text x="730" y="648" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#4b5563" text-anchor="end">3 modules · 9 lessons</text>
+
+  <!-- ─── Track 2: React ─── -->
+  <rect x="60" y="688" width="76" height="22" rx="11" fill="#61DAFB" fill-opacity="0.12" />
+  <text x="98" y="704" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#61DAFB" text-anchor="middle" font-weight="700" letter-spacing="1.5">REACT</text>
+
+  <!-- Course 05: React -->
+  <rect x="60" y="720" width="680" height="54" rx="8" fill="#ffffff" fill-opacity="0.025" />
+  <rect x="60" y="720" width="4"   height="54" rx="2" fill="#61DAFB" />
+  <text x="84" y="740" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1">COURSE 05</text>
+  <text x="84" y="760" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="16" fill="#f1f5f9" font-weight="700">React — Components, State &amp; SPAs</text>
+  <text x="730" y="748" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#4b5563" text-anchor="end">4 modules · 16 lessons</text>
+
+  <!-- ─── Track 3: Frontend AI ─── -->
+  <rect x="60" y="788" width="122" height="22" rx="11" fill="#a855f7" fill-opacity="0.18" />
+  <text x="121" y="804" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#c084fc" text-anchor="middle" font-weight="700" letter-spacing="1.5">FRONTEND AI</text>
+
+  <!-- Course 06: Frontend AI -->
+  <rect x="60" y="820" width="680" height="54" rx="8" fill="#ffffff" fill-opacity="0.025" />
+  <rect x="60" y="820" width="4"   height="54" rx="2" fill="url(#purple)" />
+  <text x="84" y="840" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1">COURSE 06</text>
+  <text x="84" y="860" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="16" fill="#f1f5f9" font-weight="700">Frontend AI Development</text>
+  <text x="730" y="848" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#4b5563" text-anchor="end">4 modules · 14 lessons</text>
+
+  <!-- ═══════════════ MASTER SESSION ═══════════════ -->
+  <rect x="60" y="892" width="680" height="96" rx="12" fill="#f59e0b" fill-opacity="0.06" />
+  <rect x="60" y="892" width="680" height="96" rx="12" stroke="#f59e0b" stroke-opacity="0.22" stroke-width="1" fill="none" />
+  <rect x="60" y="892" width="4"   height="96" rx="2" fill="url(#gold)" />
+
+  <rect x="80" y="904" width="132" height="20" rx="10" fill="#f59e0b" fill-opacity="0.18" />
+  <text x="146" y="919" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="10" fill="#f59e0b" text-anchor="middle" font-weight="700" letter-spacing="1.5">MASTER SESSION</text>
+
+  <text x="80" y="951" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="19" fill="#fef3c7" font-weight="800">Software Development Lifecycle</text>
+  <text x="80" y="974" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="12" fill="#b45309" font-weight="400">Planning  ·  Development  ·  Testing  ·  Deployment  ·  Maintenance</text>
+
+  <!-- ═══════════════ FOOTER STATS ═══════════════ -->
+  <line x1="0" y1="1018" x2="800" y2="1018" stroke="#7c3aed" stroke-opacity="0.3" stroke-width="1" />
+  <rect x="0" y="1018" width="800" height="132" fill="url(#footerBg)" />
+
+  <!-- Stat 1 — Courses -->
+  <text x="100" y="1074" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="40" fill="#ffffff" text-anchor="middle" font-weight="900">6</text>
+  <text x="100" y="1098" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="11" fill="#7c3aed" text-anchor="middle" font-weight="700" letter-spacing="2">COURSES</text>
+
+  <line x1="200" y1="1040" x2="200" y2="1110" stroke="#7c3aed" stroke-opacity="0.25" stroke-width="1" />
+
+  <!-- Stat 2 — Modules -->
+  <text x="300" y="1074" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="40" fill="#ffffff" text-anchor="middle" font-weight="900">23</text>
+  <text x="300" y="1098" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="11" fill="#7c3aed" text-anchor="middle" font-weight="700" letter-spacing="2">MODULES</text>
+
+  <line x1="400" y1="1040" x2="400" y2="1110" stroke="#7c3aed" stroke-opacity="0.25" stroke-width="1" />
+
+  <!-- Stat 3 — Lessons -->
+  <text x="500" y="1074" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="40" fill="#ffffff" text-anchor="middle" font-weight="900">81</text>
+  <text x="500" y="1098" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="11" fill="#7c3aed" text-anchor="middle" font-weight="700" letter-spacing="2">LESSONS</text>
+
+  <line x1="600" y1="1040" x2="600" y2="1110" stroke="#7c3aed" stroke-opacity="0.25" stroke-width="1" />
+
+  <!-- Stat 4 — Master Session -->
+  <text x="700" y="1074" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="40" fill="#f59e0b" text-anchor="middle" font-weight="900">1</text>
+  <text x="700" y="1098" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="11" fill="#f59e0b" text-anchor="middle" font-weight="700" letter-spacing="1">MASTER SESSION</text>
+
+  <!-- Bottom brand line -->
+  <text x="400" y="1138" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="11" fill="#374151" text-anchor="middle" font-weight="400" letter-spacing="1">COHORT 01  ·  30 MAY 2026  ·  FRONTEND DEVELOPMENT PROGRAM</text>
+</svg>

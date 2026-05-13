@@ -1,5 +1,7 @@
 # Course Catalog
 
+![Program Flyer](images/flyer.svg)
+
 ---
 
 ## Course 1 — HTML

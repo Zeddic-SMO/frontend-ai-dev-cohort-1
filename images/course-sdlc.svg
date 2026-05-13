@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#12002e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d1b69;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="divider" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0" />
+    </linearGradient>
+    <marker id="arr" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L5,2.5 z" fill="#ffffff" fill-opacity="0.22" />
+    </marker>
+    <filter id="halo" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="9" />
+    </filter>
+    <filter id="nodeHalo" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="6" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Background decorative blobs -->
+  <circle cx="100" cy="360" r="180" fill="#4c1d95" fill-opacity="0.07" />
+  <circle cx="-20" cy="30"  r="140" fill="#7c3aed" fill-opacity="0.06" />
+  <circle cx="760" cy="30"  r="100" fill="#6d28d9" fill-opacity="0.08" />
+
+  <!-- Watermark -->
+  <text x="44" y="398" font-family="monospace" font-size="80" fill="#ffffff" fill-opacity="0.022" font-weight="bold">SDLC</text>
+
+  <!-- ══════════════════════════════════════
+       SDLC CYCLE — centre (630, 200) r=115
+       ══════════════════════════════════════ -->
+
+  <!-- Outer ring glow -->
+  <circle cx="630" cy="200" r="115" fill="none" stroke="#7c3aed" stroke-opacity="0.18" stroke-width="36" filter="url(#halo)" />
+  <!-- Track ring -->
+  <circle cx="630" cy="200" r="115" fill="none" stroke="#ffffff" stroke-opacity="0.055" stroke-width="1.5" stroke-dasharray="4 6" />
+
+  <!-- Connecting lines (clockwise: Plan→Design→Develop→Test→Deploy→Maintain→Plan) -->
+  <!--   Plan     (630,  85) -->
+  <!--   Design   (730, 142) -->
+  <!--   Develop  (730, 258) -->
+  <!--   Test     (630, 315) -->
+  <!--   Deploy   (530, 258) -->
+  <!--   Maintain (530, 142) -->
+  <line x1="630" y1="85"  x2="730" y2="142" stroke="#fff" stroke-opacity="0.14" stroke-width="1.5" marker-end="url(#arr)" />
+  <line x1="730" y1="142" x2="730" y2="258" stroke="#fff" stroke-opacity="0.14" stroke-width="1.5" marker-end="url(#arr)" />
+  <line x1="730" y1="258" x2="630" y2="315" stroke="#fff" stroke-opacity="0.14" stroke-width="1.5" marker-end="url(#arr)" />
+  <line x1="630" y1="315" x2="530" y2="258" stroke="#fff" stroke-opacity="0.14" stroke-width="1.5" marker-end="url(#arr)" />
+  <line x1="530" y1="258" x2="530" y2="142" stroke="#fff" stroke-opacity="0.14" stroke-width="1.5" marker-end="url(#arr)" />
+  <line x1="530" y1="142" x2="630" y2="85"  stroke="#fff" stroke-opacity="0.14" stroke-width="1.5" marker-end="url(#arr)" />
+
+  <!-- Center -->
+  <circle cx="630" cy="200" r="44" fill="#12002e" fill-opacity="0.85" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="1.5" />
+  <text x="630" y="196" font-family="'Segoe UI',Arial,sans-serif" font-size="14" fill="#c4b5fd" fill-opacity="0.95" text-anchor="middle" font-weight="800" letter-spacing="2">SDLC</text>
+  <text x="630" y="211" font-family="'Segoe UI',Arial,sans-serif" font-size="8"  fill="#a78bfa" fill-opacity="0.55" text-anchor="middle" letter-spacing="1.5">CYCLE</text>
+
+  <!-- ── Phase node halos ── -->
+  <circle cx="630" cy="85"  r="20" fill="#a78bfa" fill-opacity="0.45" filter="url(#nodeHalo)" />
+  <circle cx="730" cy="142" r="16" fill="#22d3ee" fill-opacity="0.40" filter="url(#nodeHalo)" />
+  <circle cx="730" cy="258" r="16" fill="#34d399" fill-opacity="0.40" filter="url(#nodeHalo)" />
+  <circle cx="630" cy="315" r="16" fill="#fbbf24" fill-opacity="0.40" filter="url(#nodeHalo)" />
+  <circle cx="530" cy="258" r="16" fill="#fb7185" fill-opacity="0.40" filter="url(#nodeHalo)" />
+  <circle cx="530" cy="142" r="16" fill="#c084fc" fill-opacity="0.40" filter="url(#nodeHalo)" />
+
+  <!-- Phase 1 — Plan (top · violet) -->
+  <circle cx="630" cy="85"  r="14" fill="#12002e" stroke="#a78bfa" stroke-width="2" />
+  <circle cx="630" cy="85"  r="5"  fill="#a78bfa" />
+  <text x="630" y="61" font-family="'Segoe UI',Arial,sans-serif" font-size="11" fill="#c4b5fd" text-anchor="middle" font-weight="700" letter-spacing="0.5">PLAN</text>
+
+  <!-- Phase 2 — Design (upper-right · cyan) -->
+  <circle cx="730" cy="142" r="12" fill="#12002e" stroke="#22d3ee" stroke-width="2" />
+  <circle cx="730" cy="142" r="5"  fill="#22d3ee" />
+  <text x="752" y="146" font-family="'Segoe UI',Arial,sans-serif" font-size="11" fill="#67e8f9" text-anchor="start" font-weight="700" letter-spacing="0.5">DESIGN</text>
+
+  <!-- Phase 3 — Develop (lower-right · emerald) -->
+  <circle cx="730" cy="258" r="12" fill="#12002e" stroke="#34d399" stroke-width="2" />
+  <circle cx="730" cy="258" r="5"  fill="#34d399" />
+  <text x="752" y="262" font-family="'Segoe UI',Arial,sans-serif" font-size="11" fill="#6ee7b7" text-anchor="start" font-weight="700" letter-spacing="0.5">DEVELOP</text>
+
+  <!-- Phase 4 — Test (bottom · amber) -->
+  <circle cx="630" cy="315" r="12" fill="#12002e" stroke="#fbbf24" stroke-width="2" />
+  <circle cx="630" cy="315" r="5"  fill="#fbbf24" />
+  <text x="630" y="339" font-family="'Segoe UI',Arial,sans-serif" font-size="11" fill="#fcd34d" text-anchor="middle" font-weight="700" letter-spacing="0.5">TEST</text>
+
+  <!-- Phase 5 — Deploy (lower-left · rose) -->
+  <circle cx="530" cy="258" r="12" fill="#12002e" stroke="#fb7185" stroke-width="2" />
+  <circle cx="530" cy="258" r="5"  fill="#fb7185" />
+  <text x="508" y="262" font-family="'Segoe UI',Arial,sans-serif" font-size="11" fill="#fda4af" text-anchor="end" font-weight="700" letter-spacing="0.5">DEPLOY</text>
+
+  <!-- Phase 6 — Maintain (upper-left · purple) -->
+  <circle cx="530" cy="142" r="12" fill="#12002e" stroke="#c084fc" stroke-width="2" />
+  <circle cx="530" cy="142" r="5"  fill="#c084fc" />
+  <text x="508" y="146" font-family="'Segoe UI',Arial,sans-serif" font-size="11" fill="#d8b4fe" text-anchor="end" font-weight="700" letter-spacing="0.5">MAINTAIN</text>
+
+  <!-- ══════════════════════════════════════
+       LEFT CONTENT
+       ══════════════════════════════════════ -->
+
+  <!-- Track badge -->
+  <rect x="60" y="52" width="158" height="32" rx="16" fill="#7c3aed" fill-opacity="0.18" />
+  <text x="139" y="73" font-family="'Segoe UI',Arial,sans-serif" font-size="13" fill="#c4b5fd" fill-opacity="0.9" text-anchor="middle" font-weight="600" letter-spacing="1">FOUNDATIONS</text>
+
+  <!-- Pre-title label -->
+  <text x="60" y="154" font-family="'Segoe UI',Arial,sans-serif" font-size="15" fill="#a78bfa" fill-opacity="0.65" font-weight="500" letter-spacing="3">SOFTWARE</text>
+
+  <!-- Main title -->
+  <text x="60" y="232" font-family="'Segoe UI',Arial,sans-serif" font-size="76" fill="#ffffff" font-weight="800" letter-spacing="-2">SDLC</text>
+
+  <!-- Subtitle -->
+  <text x="62" y="272" font-family="'Segoe UI',Arial,sans-serif" font-size="17" fill="#c4b5fd" fill-opacity="0.75" font-weight="400">Development Lifecycle</text>
+
+  <!-- Divider line -->
+  <line x1="60" y1="300" x2="330" y2="300" stroke="url(#divider)" stroke-width="1" />
+
+  <!-- Stats -->
+  <text x="60" y="333" font-family="'Segoe UI',Arial,sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.45">5 Modules  ·  20 Lessons  ·  No Prerequisites</text>
+
+  <!-- Methodology tags -->
+  <rect x="60"  y="352" width="52" height="22" rx="11" fill="#7c3aed" fill-opacity="0.15" />
+  <text x="86"  y="367" font-family="'Segoe UI',Arial,sans-serif" font-size="10" fill="#c4b5fd" fill-opacity="0.85" text-anchor="middle" font-weight="600">AGILE</text>
+
+  <rect x="120" y="352" width="74" height="22" rx="11" fill="#7c3aed" fill-opacity="0.15" />
+  <text x="157" y="367" font-family="'Segoe UI',Arial,sans-serif" font-size="10" fill="#c4b5fd" fill-opacity="0.85" text-anchor="middle" font-weight="600">WATERFALL</text>
+
+  <rect x="202" y="352" width="52" height="22" rx="11" fill="#7c3aed" fill-opacity="0.15" />
+  <text x="228" y="367" font-family="'Segoe UI',Arial,sans-serif" font-size="10" fill="#c4b5fd" fill-opacity="0.85" text-anchor="middle" font-weight="600">SCRUM</text>
+
+  <rect x="262" y="352" width="60" height="22" rx="11" fill="#7c3aed" fill-opacity="0.15" />
+  <text x="292" y="367" font-family="'Segoe UI',Arial,sans-serif" font-size="10" fill="#c4b5fd" fill-opacity="0.85" text-anchor="middle" font-weight="600">DEVOPS</text>
+</svg>

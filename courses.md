@@ -4,6 +4,76 @@
 
 ---
 
+## Master Sessions
+
+Master sessions are standalone deep-dives delivered to the full cohort, regardless of track. Every learner attends. They cover foundational knowledge that underpins every course in the program.
+
+---
+
+### Master Session 1 — How the Internet Works
+
+![How the Internet Works](images/course-internet.svg)
+
+| Field | Value |
+|---|---|
+| Type | Master Session |
+| Modules | 5 |
+| Total Lessons | 18 |
+| Prerequisite | None |
+
+#### Overview
+
+Before writing a single line of HTML, every web developer should understand what actually happens when a URL is typed into a browser. This session walks through the full journey — from keyboard to screen — covering DNS, TCP/IP, HTTP, packets, status codes, and the anatomy of a URL. By the end, learners can explain the web's foundational protocols with confidence.
+
+#### Objectives
+
+By the end of this session you will be able to:
+
+- Describe the roles of clients and servers and how they interact
+- Trace the steps of a DNS lookup from browser to authoritative nameserver
+- Explain what TCP/IP guarantees and how the three-way handshake works
+- Read and write basic HTTP requests and responses
+- Identify the most common HTTP status codes and what they mean
+- Break down every component of a URL
+
+📄 [Full course notes →](how-the-internet-works.md)
+
+---
+
+### Master Session 2 — Software Development Lifecycle
+
+![Software Development Lifecycle](images/course-sdlc.svg)
+
+| Field | Value |
+|---|---|
+| Type | Master Session |
+| Modules | 5 |
+| Total Lessons | 20 |
+| Prerequisite | None |
+
+#### Overview
+
+Every piece of software is built by following a process. The SDLC is the structured sequence of phases — Plan, Design, Develop, Test, Deploy, Maintain — that takes a vague idea and turns it into a shipped, maintained product. This session covers the full lifecycle, compares methodologies (Waterfall, Agile, Scrum, Kanban, DevOps), and gives learners hands-on practice with the ceremonies and artefacts real teams use every day.
+
+#### Objectives
+
+By the end of this session you will be able to:
+
+- Name and describe each SDLC phase and its key deliverables
+- Compare Waterfall and Agile and choose the right fit for a project
+- Write user stories with clear acceptance criteria
+- Participate in sprint planning, standups, reviews, and retrospectives
+- Read a burn-down chart and interpret team velocity
+- Explain what CI/CD is and why it matters
+
+📄 [Full course notes →](software-development-lifecycle.md)
+
+---
+
+## Courses
+
+---
+
 ## Course 1 — HTML
 
 ![Course 1 — HTML](images/course-html.svg)

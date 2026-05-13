@@ -4,6 +4,8 @@
 
 ## Course 1 — HTML
 
+![Course 1 — HTML](images/course-html.svg)
+
 | Field | Value |
 |---|---|
 | Track | Web Fundamentals |
@@ -29,6 +31,8 @@ By the end of this course you will be able to:
 ---
 
 ## Course 2 — CSS
+
+![Course 2 — CSS](images/course-css.svg)
 
 | Field | Value |
 |---|---|
@@ -56,6 +60,8 @@ By the end of this course you will be able to:
 ---
 
 ## Course 3 — JavaScript
+
+![Course 3 — JavaScript](images/course-javascript.svg)
 
 | Field | Value |
 |---|---|
@@ -86,6 +92,8 @@ By the end of this course you will be able to:
 
 ## Course 4 — Git & GitHub
 
+![Course 4 — Git & GitHub](images/course-git.svg)
+
 | Field | Value |
 |---|---|
 | Track | Web Fundamentals |
@@ -112,6 +120,8 @@ By the end of this course you will be able to:
 ---
 
 ## Course 5 — React
+
+![Course 5 — React](images/course-react.svg)
 
 | Field | Value |
 |---|---|
@@ -140,6 +150,8 @@ By the end of this course you will be able to:
 ---
 
 ## Course 6 — Frontend AI Development
+
+![Course 6 — Frontend AI Development](images/course-ai.svg)
 
 | Field | Value |
 |---|---|

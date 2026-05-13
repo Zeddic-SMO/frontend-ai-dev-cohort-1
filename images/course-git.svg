@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="680" cy="-40" r="200" fill="#F05032" fill-opacity="0.06" />
+  <circle cx="720" cy="440" r="160" fill="#F05032" fill-opacity="0.05" />
+  <circle cx="-30" cy="200" r="140" fill="#F05032" fill-opacity="0.04" />
+
+  <!-- Git branch diagram (decorative) -->
+  <!-- Main line -->
+  <line x1="590" y1="80" x2="590" y2="320" stroke="#F05032" stroke-opacity="0.15" stroke-width="3" />
+  <!-- Branch line -->
+  <line x1="590" y1="160" x2="680" y2="220" stroke="#F05032" stroke-opacity="0.12" stroke-width="2" />
+  <line x1="680" y1="220" x2="590" y2="280" stroke="#F05032" stroke-opacity="0.12" stroke-width="2" />
+  <!-- Commit dots -->
+  <circle cx="590" cy="100" r="7" fill="#F05032" fill-opacity="0.25" />
+  <circle cx="590" cy="160" r="7" fill="#F05032" fill-opacity="0.25" />
+  <circle cx="680" cy="220" r="7" fill="#F05032" fill-opacity="0.25" />
+  <circle cx="590" cy="280" r="7" fill="#F05032" fill-opacity="0.25" />
+  <circle cx="590" cy="320" r="7" fill="#F05032" fill-opacity="0.25" />
+
+  <!-- Code decorations -->
+  <text x="60" y="345" font-family="monospace" font-size="40" fill="#F05032" fill-opacity="0.08" font-weight="bold">git commit -m</text>
+  <text x="520" y="375" font-family="monospace" font-size="34" fill="#F05032" fill-opacity="0.08" font-weight="bold">push</text>
+
+  <!-- Track badge -->
+  <rect x="60" y="52" width="180" height="32" rx="16" fill="#F05032" fill-opacity="0.2" />
+  <text x="150" y="73" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ffffff" fill-opacity="0.85" text-anchor="middle" font-weight="600" letter-spacing="1">WEB FUNDAMENTALS</text>
+
+  <!-- Course number -->
+  <text x="60" y="160" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="#ffffff" fill-opacity="0.5" font-weight="500" letter-spacing="2">COURSE 04</text>
+
+  <!-- Course title -->
+  <text x="60" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="62" fill="#ffffff" font-weight="800" letter-spacing="-1">Git &amp; GitHub</text>
+
+  <!-- Subtitle -->
+  <text x="60" y="258" font-family="'Segoe UI', Arial, sans-serif" font-size="20" fill="#ffffff" fill-opacity="0.65" font-weight="400">Version Control &amp; Collaboration</text>
+
+  <!-- Divider -->
+  <line x1="60" y1="290" x2="340" y2="290" stroke="#F05032" stroke-opacity="0.3" stroke-width="1" />
+
+  <!-- Stats -->
+  <text x="60" y="325" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.6">3 Modules  ·  9 Lessons  ·  No Prerequisites</text>
+</svg>

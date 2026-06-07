@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML, CSS & JS — 4-Week Plan — ICTZoid</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #FFFFFF;
+  --surface:   #F8FAFC;
+  --surface2:  #F1F5F9;
+  --border:    #E2E8F0;
+  --text:      #0F172A;
+  --muted:     #64748B;
+  --primary:   #1A56A0;
+  --code-bg:   #0F172A;
+  --code-text: #E2E8F0;
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+html { font-size: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Page wrap ── */
+.page-wrap { max-width: 900px; margin: 0 auto; padding: 0 3rem 5rem; }
+
+/* ── Cover ── */
+.cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 5rem 3rem;
+  background: #08081A;
+  color: #F8FAFC;
+  page-break-after: always;
+}
+.cover-bar {
+  width: 5px; height: 72px;
+  background: #0EA5E9;
+  border-radius: 3px;
+  margin: 0 auto 2rem;
+}
+.cover-eyebrow {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: #64748B; margin-bottom: 1rem;
+}
+.cover-title {
+  font-size: clamp(2.2rem, 6vw, 3.75rem);
+  font-weight: 900; line-height: 1.1;
+  color: #FFFFFF; margin-bottom: 1rem;
+}
+.cover-subtitle {
+  font-size: 1.05rem; color: #94A3B8;
+  max-width: 520px; margin: 0 auto 2.5rem;
+}
+.cover-pills {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.5rem; margin-bottom: 3rem;
+}
+.pill {
+  font-size: 0.75rem; font-weight: 600;
+  padding: 0.3rem 0.8rem; border-radius: 100px;
+  border: 1px solid rgba(14,165,233,0.4);
+  color: #0EA5E9; background: rgba(14,165,233,0.07);
+}
+.cover-meta {
+  font-size: 0.8rem; color: #475569; margin-top: 1rem;
+}
+.cover-author {
+  font-size: 1.15rem; font-weight: 700;
+  color: #F1F5F9; margin-top: 0.25rem;
+}
+
+/* ── Overview table ── */
+.overview-section {
+  padding: 4rem 0 2rem;
+  page-break-after: always;
+}
+
+/* ── Week sections ── */
+.week-section {
+  padding: 4rem 0 2rem;
+  page-break-before: always;
+}
+.week-number {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.4rem;
+}
+.week-badge {
+  display: inline-block;
+  font-size: 2.75rem; font-weight: 900;
+  line-height: 1; margin-bottom: 0.25rem;
+}
+.week-title {
+  font-size: 1.9rem; font-weight: 800;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.week-theme {
+  font-size: 1rem; color: var(--muted);
+  font-style: italic; margin-bottom: 2rem;
+}
+.week-divider {
+  border: none; border-top: 2px solid var(--border);
+  margin: 0 0 2rem;
+}
+
+/* ── Subject blocks ── */
+.subject-block {
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.subject-header {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: white;
+}
+.subject-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%; background: rgba(255,255,255,0.6);
+}
+.subject-body { padding: 1rem 1.25rem; background: var(--bg); }
+
+/* ── General content typography ── */
+h1 {
+  font-size: 2.25rem; font-weight: 900;
+  color: var(--text); margin-bottom: 1rem;
+}
+h2 {
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--text); margin: 2.5rem 0 0.75rem;
+  padding-top: 0.5rem; border-top: 2px solid var(--border);
+}
+h3 {
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--text); margin: 1.5rem 0 0.5rem;
+}
+h4 {
+  font-size: 0.875rem; font-weight: 700;
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.06em; margin: 1.25rem 0 0.4rem;
+}
+p { margin-bottom: 0.875rem; max-width: 72ch; }
+ul, ol { margin: 0.5rem 0 0.875rem 1.75rem; }
+li { margin-bottom: 0.25rem; }
+li > ul, li > ol { margin-top: 0.25rem; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+blockquote {
+  border-left: 4px solid #0EA5E9;
+  background: #EFF6FF;
+  padding: 0.875rem 1.1rem;
+  margin: 1.25rem 0;
+  border-radius: 0 6px 6px 0;
+  color: #1E40AF; font-style: italic;
+}
+blockquote > p { margin-bottom: 0; max-width: 100%; color: inherit; }
+hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* ── Tables ── */
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.875rem; margin: 1.25rem 0;
+  overflow-x: auto; display: block;
+}
+th {
+  background: var(--surface2); font-weight: 700;
+  text-align: left; padding: 0.55rem 0.8rem;
+  border: 1px solid var(--border);
+}
+td { padding: 0.45rem 0.8rem; border: 1px solid var(--border); vertical-align: top; }
+tr:nth-child(even) td { background: var(--surface); }
+
+/* ── Code ── */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  background: var(--surface2);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+pre {
+  background: var(--code-bg); color: var(--code-text);
+  font-family: var(--font-mono); font-size: 0.83rem;
+  line-height: 1.6; padding: 1.25rem 1.5rem;
+  border-radius: 8px; overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+  border: 1px solid #1E293B;
+}
+pre code { background: none; color: inherit; padding: 0; border: none; font-size: inherit; }
+
+/* ── Checklist wrapper ── */
+.checklist-section { page-break-before: always; padding: 4rem 0 2rem; }
+.checklist-group { margin-bottom: 2rem; }
+.checklist-group-title {
+  font-size: 1rem; font-weight: 700; color: var(--text);
+  padding: 0.5rem 0.875rem;
+  border-left: 4px solid var(--primary);
+  background: var(--surface); margin-bottom: 0.75rem;
+}
+.check-item {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  padding: 0.3rem 0.875rem; font-size: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+.check-item:last-child { border-bottom: none; }
+.check-box {
+  width: 16px; height: 16px; min-width: 16px;
+  border: 2px solid #CBD5E1; border-radius: 4px;
+  margin-top: 0.2rem;
+}
+
+/* ── Print ── */
+@media print {
+  body { font-size: 10.5pt; }
+  .week-section { page-break-before: always; }
+  pre { white-space: pre-wrap; word-break: break-all; }
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="cover">
+  <div class="cover-bar"></div>
+  <p class="cover-eyebrow">ICTZoid Web Development Program</p>
+  <h1 class="cover-title">HTML, CSS & JavaScript<br>4-Week Plan</h1>
+  <p class="cover-subtitle">
+    A simultaneous learning curriculum covering all three web fundamentals
+    before the React sessions begin — built around weekly integration projects.
+  </p>
+  <div class="cover-pills"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">4 Weeks</span><span class="pill">Pre-React</span><span class="pill">Hands-on Builds</span></div>
+  <p class="cover-meta">Written by</p>
+  <p class="cover-author">Samuel M. Ortil</p>
+  <p class="cover-meta" style="margin-top:2rem">ICTZoid &nbsp;·&nbsp; 2026</p>
+</div>
+
+
+<section class="overview-section page-wrap">
+  <blockquote>
+<p><strong>Goal:</strong> Learners build working skills in all three web technologies in parallel, reinforcing each through integration — not isolation. Every week ends with a mini-project that requires all three to work together.</p>
+<p><strong>Prerequisite:</strong> Master Session 1 — How the Internet Works</p>
+<p><strong>What comes next:</strong> Week 5 begins React sessions (Course 5)</p>
+</blockquote>
+<hr />
+<h2>How This Plan Works</h2>
+<p>Rather than finishing HTML → CSS → JS in sequence, learners study aligned topics from all three each week. Each trio of topics produces something immediately visible and interactive:</p>
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Theme</th>
+<th>HTML Topics</th>
+<th>CSS Topics</th>
+<th>JS Topics</th>
+<th>Weekly Build</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Foundations</td>
+<td>Document structure &amp; semantic elements</td>
+<td>Selectors, cascade &amp; box model</td>
+<td>Variables, data types &amp; functions</td>
+<td>Bio page</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Content &amp; Layout</td>
+<td>Links, images, tables &amp; figures</td>
+<td>Typography, Flexbox</td>
+<td>Arrays &amp; objects</td>
+<td>Course card grid</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Interaction</td>
+<td>Accessible forms &amp; ARIA</td>
+<td>CSS Grid, responsive design</td>
+<td>DOM &amp; events</td>
+<td>Responsive landing page</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Data &amp; Polish</td>
+<td>Validation &amp; semantic review</td>
+<td>Animations, dark mode &amp; CSS architecture</td>
+<td>localStorage, Fetch API &amp; async/await</td>
+<td>Interactive data app</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section>
+
+
+<section class="week-section page-wrap">
+  <p class="week-number">Week 1</p>
+  <p class="week-badge" style="color:#0EA5E9">01</p>
+  <h2 class="week-title" style="border:none;margin-top:0;padding-top:0">Week 1 — Foundations</h2>
+  <p class="week-theme">Every element has structure. Every structure has style. Every script has state.</p>
+  <hr class="week-divider">
+  
+<div class="subject-block">
+  <div class="subject-header" style="background:#E85D3A">
+    <div class="subject-dot"></div>
+    HTML (Course 1)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 1.1</strong> — HTML document structure: <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, meta tags</li>
+<li><strong>Lesson 1.2</strong> — Semantic elements: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code></li>
+<li><strong>Lesson 1.3</strong> — Text content: headings (<code>h1</code>–<code>h6</code>), paragraphs, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;blockquote&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;pre&gt;</code></li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#1A56A0">
+    <div class="subject-dot"></div>
+    CSS (Course 2 — Module 1)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 1.1</strong> — How CSS works: rule syntax, type / class / ID / pseudo-class selectors, combinators, <code>:is()</code></li>
+<li><strong>Lesson 1.2</strong> — Cascade &amp; specificity: origin, scoring, CSS custom properties (<code>--color-primary</code>, <code>--space-4</code>, etc.)</li>
+<li><strong>Lesson 1.3</strong> — The box model: <code>box-sizing: border-box</code>, padding, margin, <code>display</code> values</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#D97706">
+    <div class="subject-dot"></div>
+    JavaScript (Course 3 — Module 1)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 1.1</strong> — Variables &amp; data types: <code>const</code>/<code>let</code>, all eight types, strict equality (<code>===</code>), nullish coalescing (<code>??</code>)</li>
+<li><strong>Lesson 1.2</strong> — Functions: declaration, expression, arrow, default parameters, rest, destructured params, closures</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#16A34A">
+    <div class="subject-dot"></div>
+    Weekly Build — Bio Page
+  </div>
+  <div class="subject-body"><p>Build a personal bio page that ties everything together:<br />
+- Valid semantic HTML5 document with correct use of <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code><br />
+- CSS custom properties for the full token system (colours, spacing, typography)<br />
+- <code>box-sizing: border-box</code> applied globally<br />
+- JavaScript that reads the page's heading and logs a greeting to the console using a closure-based <code>greet()</code> function</p>
+<p><strong>Definition of done:</strong> Valid HTML (W3C Validator passes), one CSS file using only class selectors, JavaScript in a separate <code>&lt;script src&gt;</code> file.</p>
+<hr /></div>
+</div>
+
+</section>
+
+<section class="week-section page-wrap">
+  <p class="week-number">Week 2</p>
+  <p class="week-badge" style="color:#F59E0B">02</p>
+  <h2 class="week-title" style="border:none;margin-top:0;padding-top:0">Week 2 — Content & Layout</h2>
+  <p class="week-theme">Content needs context. Layout shapes meaning. Data drives display.</p>
+  <hr class="week-divider">
+  
+<div class="subject-block">
+  <div class="subject-header" style="background:#E85D3A">
+    <div class="subject-dot"></div>
+    HTML (Course 1)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 2.1</strong> — Links &amp; images: <code>&lt;a&gt;</code> with <code>href</code>/<code>target</code>/<code>rel</code>, <code>&lt;img&gt;</code> with <code>alt</code>, <code>srcset</code>, lazy loading, <code>&lt;picture&gt;</code></li>
+<li><strong>Lesson 2.2</strong> — Lists: <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;dl&gt;</code> (description lists) and when to use each</li>
+<li><strong>Lesson 2.3</strong> — Tables: <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th scope&gt;</code>, <code>&lt;caption&gt;</code> for accessible data tables</li>
+<li><strong>Lesson 2.4</strong> — Figures &amp; media: <code>&lt;figure&gt;</code>, <code>&lt;figcaption&gt;</code>, <code>&lt;video&gt;</code>, <code>&lt;audio&gt;</code>, <code>&lt;iframe&gt;</code></li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#1A56A0">
+    <div class="subject-dot"></div>
+    CSS (Course 2 — Module 1–2)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 1.4</strong> — Typography: <code>font-family</code> stacks, <code>line-height</code>, <code>rem</code>/<code>em</code>/<code>ch</code> units, <code>clamp()</code> for fluid sizing</li>
+<li><strong>Lesson 2.1</strong> — Flexbox fundamentals: <code>display: flex</code>, <code>justify-content</code>, <code>align-items</code>, <code>gap</code>, <code>flex-grow</code>/<code>shrink</code>/<code>basis</code></li>
+<li><strong>Lesson 2.2</strong> — Flexbox in practice: nav bar, card wrapping, media card, input-button group, sticky footer</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#D97706">
+    <div class="subject-dot"></div>
+    JavaScript (Course 3 — Module 1)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 1.3</strong> — Arrays: <code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>, <code>sort</code>, chaining, non-mutating add/remove patterns</li>
+<li><strong>Lesson 1.4</strong> — Objects &amp; destructuring: dot/bracket notation, spread, <code>Object.keys/values/entries</code>, destructuring with defaults and renaming</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#16A34A">
+    <div class="subject-dot"></div>
+    Weekly Build — Course Card Grid
+  </div>
+  <div class="subject-body"><p>Build a course catalog page driven by a JavaScript data array:<br />
+- HTML skeleton with semantic <code>&lt;main&gt;</code> and <code>&lt;ul&gt;</code> as the card container<br />
+- JavaScript array of 4–6 course objects (title, description, level, duration); rendered into the DOM using <code>map</code> + <code>innerHTML</code> fragment pattern from Lesson 2.1 JS<br />
+- Flexbox card grid that wraps naturally; each card has equal height with a footer that sticks to the bottom<br />
+- Fluid typography using <code>clamp()</code> for headings; <code>rem</code>-based spacing from the token system</p>
+<p><strong>Definition of done:</strong> Cards render from a JS data array (no hardcoded HTML cards), layout tested at 375px and 1280px, images have meaningful <code>alt</code> text.</p>
+<hr /></div>
+</div>
+
+</section>
+
+<section class="week-section page-wrap">
+  <p class="week-number">Week 3</p>
+  <p class="week-badge" style="color:#8B5CF6">03</p>
+  <h2 class="week-title" style="border:none;margin-top:0;padding-top:0">Week 3 — Interaction</h2>
+  <p class="week-theme">Forms collect. Grids place. Events connect.</p>
+  <hr class="week-divider">
+  
+<div class="subject-block">
+  <div class="subject-header" style="background:#E85D3A">
+    <div class="subject-dot"></div>
+    HTML (Course 1)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 3.1</strong> — Forms: <code>&lt;form&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;input&gt;</code> types, <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;legend&gt;</code>, required/pattern attributes</li>
+<li><strong>Lesson 3.2</strong> — Form accessibility: every input paired with a <code>&lt;label&gt;</code>, <code>aria-describedby</code> for hints and errors, <code>aria-invalid</code></li>
+<li><strong>Lesson 3.3</strong> — ARIA: <code>role</code>, <code>aria-label</code>, <code>aria-expanded</code>, <code>aria-hidden</code>, landmark roles; when HTML semantics are not enough</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#1A56A0">
+    <div class="subject-dot"></div>
+    CSS (Course 2 — Module 2–3)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 2.3</strong> — CSS Grid fundamentals: <code>grid-template-columns</code>, <code>auto-fit</code> + <code>minmax</code>, named areas, <code>grid-column</code>/<code>grid-row</code> placement</li>
+<li><strong>Lesson 2.4</strong> — Grid in practice: page layout with named areas, dashboard grid, image mosaic; Grid vs Flexbox rule of thumb</li>
+<li><strong>Lesson 3.1</strong> — Mobile-first responsive design: base styles for mobile, <code>min-width</code> breakpoints, standard breakpoints (640 / 768 / 1024 / 1280)</li>
+<li><strong>Lesson 3.2</strong> — Responsive navigation: hamburger pattern, <code>is-open</code> toggle, <code>slideDown</code> animation, accessible <code>aria-expanded</code></li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#D97706">
+    <div class="subject-dot"></div>
+    JavaScript (Course 3 — Module 2)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 2.1</strong> — DOM manipulation: <code>querySelector</code>, <code>classList</code>, <code>textContent</code>, <code>dataset</code>, <code>createElement</code>, <code>DocumentFragment</code>, XSS-safe patterns</li>
+<li><strong>Lesson 2.2</strong> — Events: <code>addEventListener</code>, event object, <code>preventDefault</code>, <code>stopPropagation</code>, event delegation with <code>.closest()</code>, keyboard events</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#16A34A">
+    <div class="subject-dot"></div>
+    Weekly Build — Responsive Landing Page
+  </div>
+  <div class="subject-body"><p>Build a landing page for the ICTzoid program:<br />
+- CSS Grid page layout (header / sidebar / main / footer using named areas); fluid card grid with <code>auto-fit minmax(280px, 1fr)</code><br />
+- Mobile-first: single-column at 375px, two-column at 768px, three-column at 1024px<br />
+- Responsive nav with JavaScript hamburger toggle that sets <code>aria-expanded</code> and <code>is-open</code> class<br />
+- FAQ section using event delegation: one listener on the container toggles each answer and updates <code>aria-expanded</code></p>
+<p><strong>Definition of done:</strong> Layout passes visual inspection at 375px, 768px, and 1280px; hamburger toggle works; FAQ accordion updates ARIA; no <code>onclick</code> attributes — <code>addEventListener</code> only.</p>
+<hr /></div>
+</div>
+
+</section>
+
+<section class="week-section page-wrap">
+  <p class="week-number">Week 4</p>
+  <p class="week-badge" style="color:#22C55E">04</p>
+  <h2 class="week-title" style="border:none;margin-top:0;padding-top:0">Week 4 — Data & Polish</h2>
+  <p class="week-theme">Validate input. Persist state. Fetch the world. Ship with confidence.</p>
+  <hr class="week-divider">
+  
+<div class="subject-block">
+  <div class="subject-header" style="background:#E85D3A">
+    <div class="subject-dot"></div>
+    HTML (Course 1)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 4.1</strong> — HTML validation: W3C Validator errors, common mistakes (missing <code>alt</code>, duplicate IDs, incorrect nesting)</li>
+<li><strong>Lesson 4.2</strong> — Advanced semantic elements: <code>&lt;time datetime&gt;</code>, <code>&lt;address&gt;</code>, <code>&lt;mark&gt;</code>, <code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code>, <code>&lt;dialog&gt;</code>, <code>&lt;template&gt;</code></li>
+<li><strong>Lesson 4.3</strong> — Complete HTML checklist: <code>lang</code> attribute, <code>&lt;meta charset&gt;</code>, <code>&lt;meta name="viewport"&gt;</code>, <code>&lt;meta name="description"&gt;</code>, skip-to-content link</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#1A56A0">
+    <div class="subject-dot"></div>
+    CSS (Course 2 — Module 3–4)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 3.3</strong> — Transitions &amp; keyframe animations: <code>transition</code> on specific properties, <code>@keyframes</code>, <code>fadeUp</code>, <code>spin</code>, <code>shimmer</code>, <code>prefers-reduced-motion</code></li>
+<li><strong>Lesson 3.4</strong> — Theming &amp; dark mode: <code>data-theme</code> attribute, <code>prefers-color-scheme</code>, <code>localStorage</code> persistence, smooth theme transition</li>
+<li><strong>Lesson 4.1</strong> — CSS architecture: modern reset, token file, component / layout / page folder structure, <code>@import</code> composition</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#D97706">
+    <div class="subject-dot"></div>
+    JavaScript (Course 3 — Modules 2–3)
+  </div>
+  <div class="subject-body"><ul>
+<li><strong>Lesson 2.3</strong> — Form validation with JavaScript: <code>validateField()</code>, <code>showError()</code> / <code>showSuccess()</code>, validate on blur, disable submit until valid</li>
+<li><strong>Lesson 2.4</strong> — <code>localStorage</code>: <code>setItem</code>/<code>getItem</code>/<code>JSON.stringify</code>/<code>JSON.parse</code>, safe <code>getStorage</code>/<code>setStorage</code> helpers, persistent to-do pattern</li>
+<li><strong>Lesson 3.1</strong> — Event loop &amp; Promises: call stack, task queue, <code>Promise</code> constructor, <code>.then/.catch/.finally</code>, <code>Promise.all</code></li>
+<li><strong>Lesson 3.2</strong> — Async/Await: <code>async function</code>, <code>try/catch/finally</code>, sequential vs parallel awaits, <code>for...of</code> for async loops</li>
+<li><strong>Lesson 3.3</strong> — Fetch API &amp; REST: <code>apiFetch</code> helper, GET/POST/PATCH/DELETE patterns, UI loading / error / empty states</li>
+</ul></div>
+</div>
+
+<div class="subject-block">
+  <div class="subject-header" style="background:#16A34A">
+    <div class="subject-dot"></div>
+    Weekly Build — Interactive Data App
+  </div>
+  <div class="subject-body"><p>Build a <strong>Movie Search</strong> app (or Courses Dashboard) that integrates all four weeks:<br />
+- Semantic HTML with <code>&lt;dialog&gt;</code> for the detail modal, <code>&lt;time&gt;</code> for dates, valid W3C output<br />
+- CSS split into base/components/layout files; <code>@keyframes fadeUp</code> on cards; dark/light toggle with <code>data-theme</code> + <code>localStorage</code><br />
+- JavaScript: search input calls a public API (OMDB or JSONPlaceholder), results render as a card grid, clicking a card opens a <code>&lt;dialog&gt;</code> with details, recent searches persist in <code>localStorage</code><br />
+- Full UI states: skeleton loader while fetching, error message with retry button, "No results" empty state</p>
+<p><strong>Definition of done:</strong> W3C HTML validation passes, Lighthouse Performance ≥ 90, dark mode persists on refresh, all four UI states are reachable, no <code>var</code>, no <code>==</code>, no <code>!important</code>.</p>
+<hr /></div>
+</div>
+
+</section>
+
+<section class="page-wrap" style="padding-top:3rem"><h2>Weekly Rhythm</h2>
+<p>Each week follows the same structure:</p>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monday</td>
+<td>HTML lessons + exercises for the week</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>CSS lessons + exercises for the week</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>JavaScript lessons + exercises for the week</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Integration: start the weekly build</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Complete and submit the weekly build; peer review</td>
+</tr>
+<tr>
+<td>Weekend</td>
+<td>Self-assessment against checklists; fix feedback</td>
+</tr>
+</tbody>
+</table>
+<hr /></section>
+
+<section class="checklist-section page-wrap">
+  <h2>Pre-React Readiness Checklist</h2>
+  <p style="color:var(--muted);margin-bottom:2rem">
+    Confirm every box before Week 5's React sessions begin.
+  </p>
+  
+<div class="checklist-group">
+  <div class="checklist-group-title">HTML</div>
+  <div class="check-item"><div class="check-box"></div><span>Writes a valid HTML5 document from memory</span></div><div class="check-item"><div class="check-box"></div><span>Uses semantic elements (`<main>`, `<section>`, `<article>`, `<nav>`, etc.) correctly</span></div><div class="check-item"><div class="check-box"></div><span>Every `<input>` is associated with a `<label>`</span></div><div class="check-item"><div class="check-box"></div><span>Images have meaningful `alt` text; decorative images use `alt=""`</span></div><div class="check-item"><div class="check-box"></div><span>ARIA attributes used only where HTML semantics are insufficient</span></div><div class="check-item"><div class="check-box"></div><span>W3C Validator returns zero errors on submitted work</span></div>
+</div>
+
+<div class="checklist-group">
+  <div class="checklist-group-title">CSS</div>
+  <div class="check-item"><div class="check-box"></div><span>`box-sizing: border-box` applied globally in every project</span></div><div class="check-item"><div class="check-box"></div><span>CSS custom properties used for all colours, spacing, and typography</span></div><div class="check-item"><div class="check-box"></div><span>Selects only with classes — no IDs, no `!important`</span></div><div class="check-item"><div class="check-box"></div><span>Builds any layout with Flexbox (components) and CSS Grid (page structure)</span></div><div class="check-item"><div class="check-box"></div><span>Mobile-first: base styles for mobile, `min-width` queries for larger screens</span></div><div class="check-item"><div class="check-box"></div><span>Transitions use `transform` and `opacity` only; `prefers-reduced-motion` respected</span></div><div class="check-item"><div class="check-box"></div><span>Dark/light theme working with `data-theme` + `localStorage`</span></div>
+</div>
+
+<div class="checklist-group">
+  <div class="checklist-group-title">JavaScript</div>
+  <div class="check-item"><div class="check-box"></div><span>Chooses `const` vs `let` correctly; never uses `var`</span></div><div class="check-item"><div class="check-box"></div><span>Writes functions in all three syntaxes; knows when to use each</span></div><div class="check-item"><div class="check-box"></div><span>Transforms arrays with `map`/`filter`/`reduce` without mutation</span></div><div class="check-item"><div class="check-box"></div><span>Destructures objects and arrays including nested structures</span></div><div class="check-item"><div class="check-box"></div><span>Selects, creates, updates, and removes DOM elements</span></div><div class="check-item"><div class="check-box"></div><span>Uses `addEventListener` and event delegation; no `onclick` attributes</span></div><div class="check-item"><div class="check-box"></div><span>Validates a form with JavaScript and shows accessible error messages</span></div><div class="check-item"><div class="check-box"></div><span>Reads and writes `localStorage` with JSON serialisation</span></div><div class="check-item"><div class="check-box"></div><span>Writes `async/await` with `try/catch/finally`</span></div><div class="check-item"><div class="check-box"></div><span>Makes GET, POST, PATCH, DELETE requests with `fetch`</span></div><div class="check-item"><div class="check-box"></div><span>Handles loading, error, and empty UI states</span></div><div class="check-item"><div class="check-box"></div><span>Debugs using `console` methods and Chrome DevTools breakpoints</span></div>
+</div>
+
+</section>
+
+
+<div style="height:5rem"></div>
+</body>
+</html>

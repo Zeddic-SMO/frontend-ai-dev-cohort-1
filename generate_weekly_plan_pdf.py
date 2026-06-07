@@ -7,10 +7,13 @@ import subprocess, sys, re
 from pathlib import Path
 import markdown
 
-ROOT    = Path(__file__).parent
-SRC_MD  = ROOT / "html-css-js-4-week-plan.md"
+ROOT     = Path(__file__).parent
+SRC_MD   = ROOT / "html-css-js-4-week-plan.md"
 HTML_OUT = ROOT / "html-css-js-4-week-plan.html"
 PDF_OUT  = ROOT / "html-css-js-4-week-plan.pdf"
+
+# Mirror outputs to lms-web so the deployed app always has the latest
+LMS_WEB_RESOURCES = ROOT.parent / "lms-web" / "public" / "resources"
 
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
@@ -510,3 +513,11 @@ if __name__ == "__main__":
         print(f"PDF  → {PDF_OUT}  ({size_kb} KB)")
     else:
         print("PDF generation may have failed — check the HTML output manually.")
+
+    # Mirror to lms-web/public/resources/ so the deployed app is always up to date
+    if LMS_WEB_RESOURCES.exists():
+        import shutil
+        shutil.copy(HTML_OUT, LMS_WEB_RESOURCES / "weekly-plan.html")
+        if PDF_OUT.exists():
+            shutil.copy(PDF_OUT, LMS_WEB_RESOURCES / "weekly-plan.pdf")
+        print(f"Mirrored → {LMS_WEB_RESOURCES}")

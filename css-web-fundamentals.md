@@ -1,193 +1,294 @@
 # CSS — Web Fundamentals
 
-CSS (Cascading Style Sheets) controls how HTML looks. This course covers everything from the fundamentals of selectors and the box model to Flexbox, CSS Grid, responsive design, animations, and building a maintainable design system with CSS custom properties. Every module builds directly on the previous one.
+## Welcome! What is CSS?
 
-## Module 1 — Selectors, Cascade and the Box Model
+Imagine you built a house out of LEGO bricks. The bricks are the **HTML** — the structure and the content.
 
-Master the fundamentals that every other CSS concept builds on.
+**CSS is the paint, wallpaper, and furniture.** It controls what colour things are, how big they are, where they sit on the page, and how they move.
 
-### Lesson 1.1 — How CSS Works and Selectors
+Without CSS, every website would look like a plain text document — just black words on a white background. CSS is what makes websites look cool.
 
-A CSS rule has two parts: a selector and a declaration block.
+**Here's how CSS connects to HTML:**
+
+```html
+<!-- This is your HTML file -->
+<head>
+  <link rel="stylesheet" href="style.css">  <!-- connects your CSS file -->
+</head>
+<body>
+  <h1>Hello World!</h1>
+</body>
+```
 
 ```css
-selector {
-  property: value;
+/* This is your style.css file */
+h1 {
+  color: hotpink;
+  font-size: 48px;
 }
 ```
 
-**Selector types:**
+That's it — your heading is now big and pink!
+
+---
+
+## Module 1 — Painting and Decorating
+
+### Lesson 1.1 — How CSS Rules Work
+
+A CSS "rule" is like an instruction you give to the browser. It has two parts:
+
+1. **The selector** — *who* you're talking to ("hey, all headings!")
+2. **The declarations** — *what* to change ("make them blue and big")
 
 ```css
-/* Type selectors */
-h1    { font-size: 2.5rem; }
-p     { margin-bottom: 1rem; }
-
-/* Class selectors (most common) */
-.card        { border-radius: 8px; background: white; }
-.btn-primary { background: #1A56A0; color: white; }
-
-/* ID selectors (unique per page) */
-#main-nav { position: sticky; top: 0; }
-
-/* Combinators */
-nav a    { text-decoration: none; }   /* descendant */
-nav > ul { list-style: none; }        /* direct child */
-h2 + p   { margin-top: 0; }          /* adjacent sibling */
-h2 ~ p   { color: #555; }            /* general sibling */
-
-/* Attribute selectors */
-input[type="email"] { border-color: #1A56A0; }
-a[target="_blank"]  { padding-right: 16px; }
-a[href^="https"]    { /* starts with */ }
-a[href$=".pdf"]     { /* ends with */ }
-a[href*="github"]   { /* contains */ }
-
-/* Pseudo-classes */
-a:hover            { color: #7C3AED; }
-a:focus-visible    { outline: 2px solid #7C3AED; }
-input:invalid      { border-color: #DC2626; }
-input:disabled     { opacity: 0.5; }
-li:first-child     { border-top: none; }
-li:last-child      { border-bottom: none; }
-li:nth-child(odd)  { background: #F5F7FA; }
-li:not(:last-child){ border-bottom: 1px solid #E5E7EB; }
-
-/* Pseudo-elements */
-p::first-line   { font-weight: bold; }
-.card::before   { content: ""; display: block; height: 4px; background: #1A56A0; }
-input::placeholder { color: #9CA3AF; }
-
-/* :is() for grouping */
-:is(h1, h2, h3) { font-family: 'Inter', sans-serif; line-height: 1.2; }
+/* ↓ selector: targets all <h1> elements */
+h1 {
+  color: blue;       /* ← declaration: change the colour */
+  font-size: 32px;   /* ← declaration: change the size */
+}
+/* ↑ everything between { } is the declaration block */
 ```
 
-**Exercises:**
+Every declaration is written as `property: value;` — always with a colon in the middle and a semicolon at the end.
 
-1. Write a single CSS selector for each: every `<a>` inside a `<nav>` that is also `:hover`, every `<input>` that is both `:focus` and `:invalid`, every `<li>` that is not the last child.
-2. Add hover, focus, and active states to all links and buttons on your bio page. Each state should be visually distinct. Test with both mouse and keyboard (Tab to focus).
+---
 
-### Lesson 1.2 — The Cascade and Specificity
+**Three ways to point at elements**
 
-When two rules target the same element and set the same property, the cascade decides which wins. It checks three things in order:
-
-1. **Origin** — Author CSS beats user CSS beats browser defaults
-2. **Specificity** — More specific selector wins
-3. **Order** — Later rule wins when specificity is equal
-
-**Specificity scoring:** `(inline, ID, class/attr/pseudo, element)`
+**1. By tag name** — targets every element of that type
 
 ```css
-/* Selector                  | Score    */
-*                           /* 0,0,0,0  */
-p                           /* 0,0,0,1  */
-.card                       /* 0,0,1,0  */
-#hero                       /* 0,1,0,0  */
-p.card                      /* 0,0,1,1  */
-nav a:hover                 /* 0,0,1,2  */
-#hero .card p               /* 0,1,1,1  */
-style="..."                 /* 1,0,0,0  */
-```
+/* makes ALL paragraphs dark grey */
+p {
+  color: #333333;
+}
 
-Higher score wins. Equal score → later rule wins.
-
-```css
-/* Both target <p class="intro"> */
-p.intro { color: blue; }   /* 0,0,1,1 */
-body p  { color: red;  }   /* 0,0,0,2 */
-/* Result: blue — higher specificity wins even though body p comes after */
-```
-
-**Practical rules:**
-- Style with classes, not IDs — keeps specificity low and manageable
-- Avoid `!important` — it breaks the cascade and is hard to override
-- When you need to override a library, increase specificity slightly rather than using `!important`
-
-**CSS Custom Properties (design tokens):**
-
-```css
-:root {
-  /* Colours */
-  --color-primary:  #1A56A0;
-  --color-accent:   #7C3AED;
-  --color-success:  #16A34A;
-  --color-danger:   #DC2626;
-  --color-text:     #1C1C1C;
-  --color-muted:    #6B7280;
-  --color-bg:       #FFFFFF;
-  --color-surface:  #F5F7FA;
-  --color-border:   #E5E7EB;
-
-  /* Typography */
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'Fira Code', monospace;
-  --text-sm:   0.875rem;
-  --text-base: 1rem;
-  --text-lg:   1.125rem;
-  --text-xl:   1.25rem;
-  --text-2xl:  1.5rem;
-  --text-4xl:  2.25rem;
-
-  /* Spacing (4px base scale) */
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-6:  24px;
-  --space-8:  32px;
-  --space-12: 48px;
-  --space-16: 64px;
-
-  /* Radii */
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
-  --radius-full: 9999px;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+/* makes ALL headings bold */
+h1 {
+  font-weight: bold;
 }
 ```
 
-**Exercises:**
+**2. By class** — targets elements you've labelled (most common!)
 
-1. Predict the colour for `<p class="intro">` inside `<main id="content">` given: `p { color: red; }`, `.intro { color: blue; }`, `#content p { color: green; }`, `main .intro { color: orange; }`. Test your prediction in the browser and explain the result.
-2. Create a `:root` token system for your bio page covering colours, font sizes, spacing, and shadows. Refactor every hardcoded value to use a variable.
+```html
+<!-- you add the class in HTML -->
+<div class="card">I am a card!</div>
+<div class="card">Me too!</div>
+```
 
-### Lesson 1.3 — The Box Model and Sizing
+```css
+/* targets only elements with class="card" */
+.card {
+  background: white;
+  border-radius: 8px;  /* rounds the corners */
+}
+```
 
-Every element is a rectangular box with four layers:
+Think of a class like a colour of sticky note. Any element with that sticky note gets those styles.
+
+**3. By ID** — targets one specific element (use sparingly)
+
+```html
+<nav id="main-nav">...</nav>
+```
+
+```css
+/* targets only the element with id="main-nav" */
+#main-nav {
+  background: navy;
+}
+```
+
+> **Golden rule:** Use classes (`.name`) most of the time. IDs (`#name`) are for one-of-a-kind elements only.
+
+---
+
+**Styling based on what's happening — pseudo-classes**
+
+You can style an element differently depending on what the user is doing:
+
+```css
+/* when the mouse hovers over a link */
+a:hover {
+  color: purple;
+}
+
+/* when a button is clicked */
+button:active {
+  background: darkblue;
+}
+
+/* the very first item in a list */
+li:first-child {
+  font-weight: bold;
+}
+
+/* the very last item in a list */
+li:last-child {
+  border-bottom: none;
+}
+```
+
+---
+
+**Try it yourself!**
+
+Create an `index.html` and a `style.css`. In your HTML, add:
+- A heading `<h1>` with your name
+- A paragraph `<p>` with a fun fact about yourself
+- A `<div class="card">` around a short description of your favourite hobby
+
+In your CSS:
+- Change the `<h1>` to your favourite colour
+- Make `.card` have a background colour and rounded corners
+- Add a hover colour change to any link
+
+---
+
+### Lesson 1.2 — Colours and Text
+
+**Colours in CSS**
+
+There are several ways to write a colour:
+
+```css
+.box {
+  /* by name — easy to read, limited options */
+  color: red;
+  color: hotpink;
+  color: cornflowerblue;
+
+  /* hex code — a specific colour (the most common way) */
+  color: #FF0000;   /* red */
+  color: #1A56A0;   /* a nice blue */
+  color: #FFFFFF;   /* white */
+  color: #000000;   /* black */
+
+  /* rgb — Red, Green, Blue, each from 0–255 */
+  color: rgb(255, 0, 0);       /* red */
+  color: rgb(26, 86, 160);     /* that same nice blue */
+
+  /* rgba — same as rgb, but with transparency (0 = invisible, 1 = solid) */
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+}
+```
+
+> **Tip:** In VS Code, click on any colour value and a colour picker will appear. You can drag to choose any colour you like!
+
+---
+
+**Text styling**
+
+```css
+p {
+  font-size: 18px;       /* how big the text is */
+  font-weight: bold;     /* bold, or use a number like 400 (normal) or 700 (bold) */
+  font-style: italic;    /* slanted text */
+  text-align: center;    /* left | center | right */
+  text-decoration: underline; /* underline, line-through, or none */
+  line-height: 1.6;      /* space between lines — 1.5 to 1.8 is comfortable to read */
+  letter-spacing: 2px;   /* space between letters */
+  color: #333333;        /* the text colour */
+}
+```
+
+**Choosing fonts**
+
+Browsers come with only a few built-in fonts. You can load extra ones from Google Fonts for free:
+
+```html
+<!-- Add this inside your <head> in HTML -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+```
+
+```css
+/* Now use it in CSS */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+```
+
+---
+
+**Try it yourself!**
+
+Add these to your bio page:
+1. Give the `<body>` a background colour you like
+2. Make your `<h1>` a different font and a large size
+3. Make your paragraph text comfortable to read with `line-height: 1.7`
+4. Pick a Google Font and load it into your project
+
+---
+
+### Lesson 1.3 — The Box Model (Everything is a Box!)
+
+Here's a secret: **every single thing on a web page is a rectangle**. Even circles are just rectangles with very round corners.
+
+Every rectangle has four layers, like layers of a sandwich:
 
 ```
 ┌─────────────────────────────┐
-│           MARGIN            │  ← space outside the element
+│           MARGIN            │  ← empty space OUTSIDE the element
 │  ┌───────────────────────┐  │
-│  │        BORDER         │  │  ← visible edge
+│  │        BORDER         │  │  ← the visible edge (like a picture frame)
 │  │  ┌─────────────────┐  │  │
-│  │  │     PADDING     │  │  │  ← space between border and content
+│  │  │     PADDING     │  │  │  ← breathing room INSIDE the border
 │  │  │  ┌───────────┐  │  │  │
-│  │  │  │  CONTENT  │  │  │  │  ← text, images, children
+│  │  │  │  CONTENT  │  │  │  │  ← your actual text or image
 │  │  │  └───────────┘  │  │  │
 │  │  └─────────────────┘  │  │
 │  └───────────────────────┘  │
 └─────────────────────────────┘
 ```
 
-**The box-sizing problem:**
+Think of it like a framed photo:
+- The **photo** is the content
+- The white space inside the frame is the **padding**
+- The **frame** itself is the border
+- The wall space around the frame is the **margin**
+
+---
+
+**Setting each layer:**
 
 ```css
-/* Default (content-box): width = content only */
-.box { width: 300px; padding: 24px; border: 2px solid; }
-/* Actual rendered width: 300 + 48 + 4 = 352px — confusing! */
+.card {
+  /* CONTENT size */
+  width: 300px;
+  height: 200px;
 
-/* border-box: width = content + padding + border */
-.box { box-sizing: border-box; width: 300px; padding: 24px; border: 2px solid; }
-/* Actual rendered width: 300px — predictable! */
+  /* PADDING — space inside, between content and border */
+  padding: 20px;           /* all four sides */
+  padding: 10px 20px;      /* top+bottom | left+right */
+
+  /* BORDER — the visible edge */
+  border: 2px solid black; /* thickness | style | colour */
+  border-radius: 12px;     /* rounds the corners */
+
+  /* MARGIN — space outside, between this and other elements */
+  margin: 16px;            /* all four sides */
+  margin: 0 auto;          /* 0 top/bottom, auto left/right = horizontally centred */
+}
 ```
 
-Always add this to every project:
+---
+
+**The box-sizing fix (very important!)**
+
+By default, `width` only counts the content — padding and border are *added on top*. This is confusing. Here's the problem:
+
+```css
+.box {
+  width: 300px;
+  padding: 20px;    /* adds 20px on left AND right = 40px extra */
+  border: 2px solid;/* adds 2px on left AND right = 4px extra */
+}
+/* Actual width on screen: 300 + 40 + 4 = 344px — NOT what you said! */
+```
+
+The fix — paste this at the very top of every CSS file you ever write:
 
 ```css
 *, *::before, *::after {
@@ -195,740 +296,711 @@ Always add this to every project:
 }
 ```
 
-**Spacing shorthand:**
+Now `width: 300px` means the *total* width is 300px, including padding and border. Much more predictable!
+
+---
+
+**Try it yourself!**
+
+1. Create a `.card` div with some text inside. Give it:
+   - A background colour
+   - `padding: 24px`
+   - `border: 2px solid` in a colour of your choice
+   - `border-radius: 12px`
+   - `margin: 20px auto` to centre it on the page
+
+2. Open your browser's DevTools (right-click → Inspect) and click on your card. You'll see the box model diagram showing exactly how much space each layer takes up.
+
+---
+
+### Lesson 1.4 — CSS Variables (Your Colour Palette!)
+
+Imagine having to change your website's main colour from blue to green. If you typed `#1A56A0` in 50 different places, you'd have to change it 50 times.
+
+**CSS variables** let you define a value once and use it everywhere:
 
 ```css
-.box {
-  padding: 24px;                    /* all four sides */
-  padding: 16px 24px;               /* top/bottom | left/right */
-  padding: 8px 12px 16px 20px;     /* top | right | bottom | left */
-  margin: 0 auto;                   /* centred horizontally */
+/* Define your variables at the top of your CSS — inside :root */
+:root {
+  --my-blue: #1A56A0;
+  --my-pink: #FF6B9D;
+  --text-colour: #333333;
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 32px;
 }
 ```
 
-**Display values:**
-
 ```css
-div, p, h1  { display: block; }        /* full width, stacks vertically */
-span, a     { display: inline; }       /* flows with text */
-.badge      { display: inline-block; } /* flows with text, respects width/height */
-.hidden     { display: none; }         /* removed from layout entirely */
-.invisible  { visibility: hidden; }   /* hidden but still takes up space */
-```
-
-**Exercises:**
-
-1. Create a `.card` with `box-sizing: border-box`, `width: 320px`, `padding: 24px`, `border: 1px solid`, `border-radius: 8px`. Inspect it in DevTools → Computed → Box Model. Verify the total width is exactly 320px.
-2. Without `box-sizing: border-box`, what is the rendered width of `width: 400px; padding: 32px; border: 3px solid;`? Show your calculation.
-
-### Lesson 1.4 — Typography
-
-```css
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-               Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.6;      /* 1.5–1.8 for readability */
-  color: var(--color-text);
-  -webkit-font-smoothing: antialiased;
+/* Use them anywhere with var(--name) */
+h1 {
+  color: var(--my-blue);
+  margin-bottom: var(--spacing-medium);
 }
 
-h1, h2, h3, h4 {
-  font-weight: 700;
-  line-height: 1.2;      /* tighter for headings */
+.card {
+  border: 2px solid var(--my-blue);
+  padding: var(--spacing-medium);
+  color: var(--text-colour);
 }
 
-/* Fluid sizing with clamp(min, preferred, max) */
-h1 { font-size: clamp(2rem,   5vw, 3.5rem); }
-h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem,2.5vw,1.75rem); }
-
-p {
-  max-width: 65ch;    /* optimal line length ~65 characters */
-  font-size: 1rem;    /* = 16px (relative to root) */
-}
-
-code, pre {
-  font-family: 'Fira Code', 'Consolas', monospace;
-  font-size: 0.875em; /* relative to parent element's font size */
+.highlight {
+  background: var(--my-pink);
 }
 ```
 
-**Units reference:**
+Now to change your blue to green — change it in ONE place and everything updates instantly.
 
-| Unit | Relative to | Best for |
-|------|------------|---------|
-| `px` | Screen pixels | Borders, shadows |
-| `rem` | Root font size (16px) | Font sizes, spacing |
-| `em` | Parent font size | Padding on buttons (scales with font) |
-| `%` | Parent dimension | Widths in fluid layouts |
-| `vw/vh` | Viewport width/height | Hero heights, fluid spacing |
-| `ch` | Width of "0" character | Line length control |
-| `clamp()` | min / preferred / max | Fluid typography |
+---
 
-**Exercises:**
+**Try it yourself!**
 
-1. Set up the complete typography system above on your bio page. Every font size must use a CSS variable. No hardcoded `px` values for text.
-2. Use `clamp()` for `h1` through `h3`. Resize your browser from 320px to 1400px — font sizes should scale smoothly without any media queries.
+Add a `:root` block with:
+- Your favourite main colour as `--color-main`
+- A background colour as `--color-bg`
+- A text colour as `--color-text`
+- Three spacing sizes: `--space-small`, `--space-medium`, `--space-large`
 
-## Module 2 — Layout
+Then update your page to use `var()` everywhere instead of typing the values directly.
 
-Build any layout — from a navigation bar to a full dashboard — using Flexbox and CSS Grid.
+---
 
-### Lesson 2.1 — Flexbox Fundamentals
+## Module 2 — Arranging Things on the Page
 
-Flexbox is for **one-dimensional** layouts — items in a row or a column.
+Up until now, elements just stack on top of each other — one after another, top to bottom. This module is about *controlling where things go*.
+
+### Lesson 2.1 — Flexbox: Arranging Things in a Row or Column
+
+**What is Flexbox?**
+
+Imagine you have a shelf. You can put items on it and decide:
+- Should they line up left-to-right, or top-to-bottom?
+- Should they be squished together or spread out?
+- Should they be at the top, middle, or bottom of the shelf?
+
+That's Flexbox! You apply it to the **container** (the shelf), and it controls how the **children** (the items) are arranged.
 
 ```css
-/* Container properties */
+.shelf {
+  display: flex; /* turns on Flexbox — all direct children become flex items */
+}
+```
+
+---
+
+**Direction: row or column?**
+
+```css
 .container {
   display: flex;
-
-  flex-direction: row;          /* row | row-reverse | column | column-reverse */
-  flex-wrap: nowrap;            /* nowrap | wrap */
-  flex-flow: row wrap;          /* shorthand for direction + wrap */
-
-  /* Main axis alignment */
-  justify-content: flex-start;  /* flex-start | flex-end | center |
-                                   space-between | space-around | space-evenly */
-
-  /* Cross axis alignment */
-  align-items: stretch;         /* stretch | flex-start | flex-end | center | baseline */
-
-  align-content: flex-start;    /* multi-line cross axis */
-  gap: 16px;                    /* gap between items */
-  gap: 16px 24px;               /* row-gap column-gap */
-}
-
-/* Item properties */
-.item {
-  flex-grow:   0;       /* 0 = don't grow | 1 = grow to fill */
-  flex-shrink: 1;       /* 1 = can shrink | 0 = never shrink */
-  flex-basis:  auto;    /* base size before grow/shrink */
-  flex: 1;              /* shorthand: 1 1 0% */
-  flex: none;           /* shorthand: 0 0 auto */
-  align-self: center;   /* override align-items for this item */
-  order: -1;            /* change visual order (not DOM order) */
+  flex-direction: row;    /* → items go left to right (the default) */
+  /* flex-direction: column; ↓ items go top to bottom */
 }
 ```
 
-**Common patterns:**
+---
+
+**Spacing items along the main direction**
 
 ```css
-/* Perfect centering */
-.centred { display: flex; align-items: center; justify-content: center; }
-
-/* Nav bar: logo left, links right */
-.nav      { display: flex; align-items: center; gap: 8px; }
-.nav .logo{ margin-right: auto; }
-
-/* Cards that wrap */
-.cards { display: flex; flex-wrap: wrap; gap: 24px; }
-.card  { flex: 1 1 280px; max-width: 400px; }
-
-/* Sidebar layout */
-.layout  { display: flex; gap: 32px; align-items: flex-start; }
-.sidebar { flex: 0 0 280px; }
-.content { flex: 1; }
-
-/* Sticky footer */
-body { display: flex; flex-direction: column; min-height: 100vh; }
-main { flex: 1; }
-
-/* Equal-height cards, footer always at bottom */
-.card      { display: flex; flex-direction: column; }
-.card-body { flex: 1; }
-```
-
-**Exercises:**
-
-1. Build a navigation bar with Flexbox: logo left, links in the centre, "Enrol" button on the right. No absolute positioning.
-2. Build a card grid: four cards that wrap naturally. Every card has equal height regardless of content. The footer inside each card sticks to the bottom.
-3. Build a sticky footer layout: header at top, main content in the middle, footer always at the bottom even when content is short.
-
-### Lesson 2.2 — Flexbox in Practice
-
-```css
-/* Media card — image left, content right */
-.media-card {
+.container {
   display: flex;
-  gap: 16px;
-  align-items: flex-start;
+  justify-content: flex-start;    /* pack everything to the left */
+  justify-content: center;        /* everything in the middle */
+  justify-content: flex-end;      /* pack everything to the right */
+  justify-content: space-between; /* first item left, last item right, rest spread out */
+  justify-content: space-evenly;  /* equal space between AND around all items */
 }
-.media-card__image { flex: 0 0 80px; }
-.media-card__body  { flex: 1; }
+```
 
-/* Pill / badge */
-.badge {
-  display: inline-flex;
+**Aligning items in the other direction**
+
+```css
+.container {
+  display: flex;
+  align-items: flex-start; /* items line up at the top */
+  align-items: center;     /* items line up in the middle (vertically) */
+  align-items: flex-end;   /* items line up at the bottom */
+  align-items: stretch;    /* items stretch to fill the full height (default) */
+}
+```
+
+---
+
+**Gap — space between items**
+
+```css
+.container {
+  display: flex;
+  gap: 16px; /* adds 16px of space between each item */
+}
+```
+
+---
+
+**The most useful Flexbox trick: perfect centering**
+
+Centering something used to be hard. With Flexbox it's three lines:
+
+```css
+.centred-box {
+  display: flex;
+  justify-content: center; /* centre horizontally */
+  align-items: center;     /* centre vertically */
+  height: 300px;           /* needs a height to centre in */
+}
+```
+
+---
+
+**Common patterns you'll use constantly**
+
+```css
+/* Navigation bar — logo on the left, links on the right */
+.nav {
+  display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 9999px;
+}
+.nav .logo {
+  margin-right: auto; /* pushes everything after it to the far right */
 }
 
-/* Form row */
-.input-group {
+/* Cards that wrap to a new row when there's no room */
+.card-grid {
   display: flex;
-  align-items: stretch;
+  flex-wrap: wrap; /* allow wrapping */
+  gap: 24px;
 }
-.input-group input  { flex: 1; border-radius: 6px 0 0 6px; }
-.input-group button { flex: 0 0 auto; border-radius: 0 6px 6px 0; }
+.card {
+  flex: 1 1 250px; /* each card is at least 250px wide, then grows to fill space */
+}
 
-/* Responsive reorder — image below text on mobile, left on desktop */
-.feature {
+/* Make the footer always sit at the bottom of the page */
+body {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  min-height: 100vh; /* at least as tall as the screen */
 }
-.feature__image { order: 2; }  /* below text by default */
-.feature__text  { order: 1; }
-
-@media (min-width: 768px) {
-  .feature            { flex-direction: row; }
-  .feature__image     { order: 1; }  /* left on desktop */
-  .feature__text      { order: 2; }
+main {
+  flex: 1; /* main content grows to fill all leftover space */
 }
 ```
 
-**Exercises:**
+---
 
-1. Build a "media card" component (avatar left, name + bio right) using Flexbox. The avatar should never shrink, even when the bio text is very long.
-2. Build a search input group: a text input and a "Search" button fused into a single pill shape. The input grows to fill space; the button stays a fixed width.
+**Try it yourself!**
 
-### Lesson 2.3 — CSS Grid Fundamentals
+1. **Centering challenge:** Create a `<div class="hero">` that is 400px tall. Put an `<h1>` inside it. Use Flexbox to perfectly centre the heading both horizontally and vertically.
 
-CSS Grid is for **two-dimensional** layouts — rows AND columns simultaneously.
+2. **Navigation challenge:** Build a nav bar with a logo on the left and three links on the right. Use Flexbox with `margin-right: auto` on the logo — no floating, no absolute positioning.
+
+3. **Card grid challenge:** Create four `<div class="card">` elements inside a container. Use Flexbox with `flex-wrap: wrap` so they arrange themselves automatically. Make each card at least 200px wide.
+
+---
+
+### Lesson 2.2 — CSS Grid: Drawing a Layout on Graph Paper
+
+**What is CSS Grid?**
+
+Flexbox is great for one direction at a time (a row *or* a column). But what if you need to control rows *and* columns at the same time — like a newspaper layout or a photo gallery?
+
+That's what **CSS Grid** is for. Think of it like drawing a grid on graph paper, then deciding which squares each piece of content occupies.
+
+---
+
+**Setting up a grid**
 
 ```css
-/* Container properties */
-.grid {
+.container {
   display: grid;
 
-  /* Explicit columns */
-  grid-template-columns: 200px 1fr 1fr;
+  /* Define 3 equal columns */
+  grid-template-columns: 1fr 1fr 1fr;
+
+  /* Same thing, shorter */
   grid-template-columns: repeat(3, 1fr);
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* responsive */
-  grid-template-columns: 280px minmax(0, 1fr);
 
-  /* Explicit rows */
-  grid-template-rows: auto 1fr auto;
-
-  /* Named areas */
-  grid-template-areas:
-    "header  header"
-    "sidebar content"
-    "footer  footer";
-
+  /* Space between all cells */
   gap: 24px;
-  align-items: start;
+}
+```
+
+`1fr` means "1 fraction of the available space". Three `1fr` columns means three equal-width columns.
+
+---
+
+**A magic responsive trick**
+
+This one line creates as many columns as will fit, with no media queries:
+
+```css
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+```
+
+Translation: "Make columns that are at least 250px wide. Fit as many as you can. Stretch them equally to fill any leftover space."
+
+Resize your browser — the number of columns adjusts automatically!
+
+---
+
+**Naming areas (the easy way to build page layouts)**
+
+Instead of counting rows and columns, you can give areas names:
+
+```css
+.page {
+  display: grid;
+  grid-template-areas:
+    "header  header"    /* row 1: header takes up both columns */
+    "sidebar content"   /* row 2: sidebar on left, content on right */
+    "footer  footer";   /* row 3: footer takes up both columns */
+  grid-template-columns: 250px 1fr; /* sidebar is 250px, content fills the rest */
+  grid-template-rows: auto 1fr auto; /* header and footer shrink to content, main grows */
+  min-height: 100vh;
 }
 
-/* Item placement by named area */
+/* Each element claims its named area */
 header  { grid-area: header; }
 .sidebar{ grid-area: sidebar; }
 main    { grid-area: content; }
 footer  { grid-area: footer; }
-
-/* Item placement by line numbers */
-.hero { grid-column: 1 / 3; grid-row: 1; }
-.full { grid-column: 1 / -1; }   /* span all columns */
-.wide { grid-column: span 2; }   /* span 2 from wherever it lands */
 ```
 
-**Practical layouts:**
+---
+
+**Making items span multiple columns or rows**
 
 ```css
-/* Responsive card grid — no media queries needed */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-/* Classic page layout */
-.page {
-  display: grid;
-  grid-template-areas:
-    "header"
-    "main"
-    "footer";
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
-}
-
-/* Dashboard — 12 column grid */
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 16px;
-}
-.stat-card  { grid-column: span 3; }   /* 4 per row */
-.chart-main { grid-column: span 8; }
-.chart-side { grid-column: span 4; }
-.table      { grid-column: 1 / -1; }  /* full width */
-```
-
-**Exercises:**
-
-1. Build a full-page layout with `grid-template-areas`: header spanning both columns, sidebar (280px), content (flexible), and footer spanning both. Use `min-height: 100vh`.
-2. Build a responsive card grid with `auto-fit` and `minmax(280px, 1fr)`. Cards should fill all available space with no empty gaps. Test by resizing the browser.
-
-### Lesson 2.4 — Grid in Practice
-
-```css
-/* Image mosaic */
-.mosaic {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 8px;
-}
-.mosaic .featured {
+/* This item takes up 2 columns */
+.wide-card {
   grid-column: span 2;
-  grid-row: span 2;
-}
-.mosaic img {
-  width: 100%; height: 100%;
-  object-fit: cover;
 }
 
-/* Marketing grid (asymmetric) */
-.marketing {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 24px;
+/* This item takes up the full width (from first to last column) */
+.full-width {
+  grid-column: 1 / -1;
 }
-.marketing .hero-text { grid-column: 1 / 3; }
-.marketing .hero-img  { grid-row: 1 / 3; grid-column: 3; }
 ```
 
-**Grid vs Flexbox — the rule of thumb:**
-- Use **Grid** when you are designing the page or a complex two-dimensional area
-- Use **Flexbox** inside Grid cells for component-level alignment
+---
+
+**Grid vs Flexbox — which one do I use?**
+
+| Situation | Use |
+|---|---|
+| Items in a single row (navigation, button group) | Flexbox |
+| Items in a single column (stacked content) | Flexbox |
+| Full-page layout (header, sidebar, footer) | Grid |
+| Photo gallery or card gallery | Grid |
+| Both — align items *inside* a grid cell | Flexbox inside Grid |
+
+They work great together. Use Grid for the big picture, Flexbox inside each piece.
+
+---
+
+**Try it yourself!**
+
+1. **Page layout challenge:** Create a full page layout with `grid-template-areas` — a header, a 250px sidebar, a main content area, and a footer. Give each area a different background colour so you can see the layout clearly.
+
+2. **Photo gallery challenge:** Create 6 `<div>` boxes inside a grid container. Use `auto-fit` and `minmax(200px, 1fr)` so they arrange into as many columns as fit. Resize the browser to see them reflow.
+
+---
+
+## Module 3 — Making It Look Great on Every Screen
+
+### Lesson 3.1 — Responsive Design: Phones, Tablets, Desktops
+
+**The problem**
+
+Your page might look perfect on your laptop. But someone opening it on their phone sees a completely different screen — much narrower. Without responsive design, your layout might break completely.
+
+**The solution: media queries**
+
+A media query lets you say "apply these styles ONLY when the screen is a certain width":
 
 ```css
-/* Grid for the page structure */
-.page {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 32px;
-}
-
-/* Flexbox inside a grid cell */
+/* These styles apply to EVERYONE, all screen sizes */
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-}
-```
-
-**Exercises:**
-
-1. Build a dashboard: 4 stat cards (span 3 of 12 columns each), a large chart (span 8) and small chart (span 4), and a full-width table below.
-2. Build a 4×4 image mosaic where the first image is double-width and double-height. All images use `object-fit: cover` and fill their cells perfectly.
-
-## Module 3 — Responsive Design and Visual Effects
-
-Make pages work on every screen size and feel polished with motion and transitions.
-
-### Lesson 3.1 — Mobile-First Responsive Design
-
-**Mobile-first means:** write base styles for mobile, then add media queries for larger screens. Smaller is simpler — start there.
-
-```css
-/* Base styles — mobile (0px+) */
-.card {
-  width: 100%;
-  padding: var(--space-4);
-  font-size: var(--text-base);
+  width: 100%;    /* full width on small screens */
+  padding: 16px;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: 1fr;   /* single column */
-  gap: var(--space-4);
-}
-
-/* Tablet (640px+) */
-@media (min-width: 640px) {
-  .cards { grid-template-columns: repeat(2, 1fr); }
-  .card  { padding: var(--space-6); }
-}
-
-/* Laptop (1024px+) */
-@media (min-width: 1024px) {
-  .cards { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* Desktop (1280px+) */
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--space-6);
-  }
-}
-```
-
-**Standard breakpoints:**
-
-| Name | Width | Target |
-|------|-------|--------|
-| sm | 640px | Large phones |
-| md | 768px | Tablets |
-| lg | 1024px | Laptops |
-| xl | 1280px | Desktops |
-| 2xl | 1536px | Wide screens |
-
-**Other media query features:**
-
-```css
-@media (prefers-color-scheme: dark)     { /* OS dark mode         */ }
-@media (prefers-reduced-motion: reduce) { /* Motion sensitivity   */ }
-@media (orientation: landscape)        { /* Landscape phone       */ }
-@media print                           { /* Print stylesheet      */ }
-```
-
-**Exercises:**
-
-1. Rebuild your bio page as mobile-first. Single column on mobile, two columns at 640px, three columns at 1024px. No desktop styles in the base CSS.
-2. Add a `prefers-reduced-motion` query that disables all animations and transitions for users who prefer reduced motion.
-
-### Lesson 3.2 — Responsive Navigation
-
-```css
-/* Mobile — vertical menu, hidden by default */
-.nav-links {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 64px; left: 0;
-  width: 100%;
-  background: white;
-  padding: var(--space-4);
-  border-top: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md);
-}
-
-.nav-links.is-open {
-  display: flex;
-  animation: slideDown 200ms ease-out;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.hamburger { display: flex; }
-
-/* Desktop — horizontal, always visible */
+/* These styles ONLY apply when the screen is 768px or wider */
 @media (min-width: 768px) {
-  .nav-links {
-    display: flex;
-    flex-direction: row;
-    position: static;
-    width: auto;
-    padding: 0;
-    box-shadow: none;
-    border-top: none;
-    gap: var(--space-2);
+  .card {
+    width: 48%;   /* two cards side by side on tablets */
+    padding: 24px;
   }
-  .hamburger { display: none; }
+}
+
+/* These styles ONLY apply when the screen is 1024px or wider */
+@media (min-width: 1024px) {
+  .card {
+    width: 30%;   /* three cards per row on laptops */
+  }
 }
 ```
 
-The JavaScript toggle updates `aria-expanded` and `aria-label` on each click:
+---
 
-```javascript
-const hamburger = document.querySelector('.hamburger');
-const navLinks  = document.querySelector('.nav-links');
+**Start from mobile — always**
 
-hamburger.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('is-open');
-  hamburger.setAttribute('aria-expanded', isOpen);
-  hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-});
-```
-
-**Exercises:**
-
-1. Build a complete responsive navigation with hamburger toggle. The toggle must update `aria-expanded` and have a visible focus ring. At 768px it becomes a horizontal menu.
-
-### Lesson 3.3 — Transitions and Animations
+This is called **"mobile-first"** design. Write your default styles for small screens, then *add* complexity for larger screens. It's easier than the other way around.
 
 ```css
-/* Transitions — animate from one state to another */
-.btn {
-  background: var(--color-primary);
-  transform: translateY(0);
-  box-shadow: var(--shadow-sm);
-  /* Always transition specific properties — never 'all' */
-  transition: background 200ms ease,
-              transform  200ms ease,
-              box-shadow 200ms ease;
+/* WRONG way — start desktop, try to undo for mobile */
+.menu { display: flex; } /* desktop style first */
+@media (max-width: 768px) {
+  .menu { display: none; } /* messy override */
 }
-.btn:hover  { background: #1246A0; transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.btn:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+
+/* RIGHT way — start mobile, add for larger screens */
+.menu { display: none; }  /* hidden on mobile */
+@media (min-width: 768px) {
+  .menu { display: flex; } /* shown on desktop */
+}
 ```
 
-**Timing functions:**
+---
+
+**Common screen size breakpoints**
+
+| Name | Width | What it targets |
+|---|---|---|
+| Small | 640px | Large phones |
+| Medium | 768px | Tablets |
+| Large | 1024px | Laptops |
+| Extra large | 1280px | Desktop monitors |
+
+---
+
+**A special media query for people who prefer less movement**
+
+Some people get dizzy from lots of animation. You can turn off your animations for them:
 
 ```css
-transition-timing-function: ease;                         /* starts fast, slows at end */
-transition-timing-function: ease-in-out;                  /* slow start and end */
-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);/* Material Design standard */
-```
-
-**Keyframe animations:**
-
-```css
-/* Entrance */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Loading spinner */
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Pulsing badge */
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.05); }
-}
-
-/* Skeleton shimmer */
-@keyframes shimmer {
-  from { background-position: -200% 0; }
-  to   { background-position:  200% 0; }
-}
-
-/* Usage */
-.hero-title { animation: fadeUp 600ms ease-out both; }
-
-.spinner {
-  width: 24px; height: 24px;
-  border: 3px solid #E5E7EB;
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 700ms linear infinite;
-}
-
-.skeleton {
-  background: linear-gradient(90deg, #E5E7EB 25%, #F3F4F6 50%, #E5E7EB 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: var(--radius-sm);
-}
-
-/* Staggered list entrance */
-.item:nth-child(1) { animation: fadeUp 400ms ease-out both; animation-delay:   0ms; }
-.item:nth-child(2) { animation: fadeUp 400ms ease-out both; animation-delay: 100ms; }
-.item:nth-child(3) { animation: fadeUp 400ms ease-out both; animation-delay: 200ms; }
-```
-
-**Performance — only animate:**
-- `transform` (translate, rotate, scale)
-- `opacity`
-
-Animating `width`, `height`, `margin`, `top`, `left` causes layout recalculation and janky performance.
-
-```css
-/* Respect user preferences */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }
 ```
 
-**Exercises:**
+---
 
-1. Add hover transitions to all cards and buttons: lift (`translateY(-2px)`), deeper shadow, slight brightness change. All 200ms ease.
-2. Add a `fadeUp` animation to each section on your page. Stagger them with `animation-delay` so they appear sequentially.
-3. Build a loading spinner and a skeleton card using only CSS animations. Add the `prefers-reduced-motion` override.
+**Try it yourself!**
 
-### Lesson 3.4 — Theming and Dark Mode
+1. Take your card grid and make it truly responsive:
+   - 1 card per row on mobile (default)
+   - 2 cards per row at 640px
+   - 3 cards per row at 1024px
+
+2. Use your browser's DevTools to simulate a phone. In Chrome: right-click → Inspect → click the phone icon in the top-left of DevTools. Test your page at iPhone and iPad sizes.
+
+---
+
+### Lesson 3.2 — Transitions and Animations
+
+**Transitions — smooth changes**
+
+Without transitions, changes are instant and jarring. With them, changes animate smoothly.
 
 ```css
-/* Light theme (default) */
-:root {
-  --bg:         #FFFFFF;
-  --bg-subtle:  #F5F7FA;
-  --text:       #1C1C1C;
-  --text-muted: #6B7280;
-  --border:     #E5E7EB;
-  --shadow:     rgba(0,0,0,0.08);
+.button {
+  background: blue;
+  /* list the properties you want to animate smoothly */
+  transition: background 200ms ease;
 }
 
-/* Dark theme */
-[data-theme="dark"] {
-  --bg:         #0B1628;
-  --bg-subtle:  #0F1E35;
-  --text:       #F1F5F9;
-  --text-muted: #94A3B8;
-  --border:     #1E2D45;
-  --shadow:     rgba(0,0,0,0.4);
+.button:hover {
+  background: darkblue; /* this change now animates over 200 milliseconds */
+}
+```
+
+The transition property takes: `property duration timing-function`
+- `property` — what to animate (`background`, `color`, `transform`, etc.)
+- `duration` — how long (`200ms` = 0.2 seconds)
+- `timing-function` — the speed curve (`ease` = starts fast, slows down)
+
+---
+
+**Transform — move, scale, and rotate without breaking layout**
+
+```css
+.card {
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-/* OS preference — applies when user has not toggled manually */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:         #0B1628;
-    --bg-subtle:  #0F1E35;
-    --text:       #F1F5F9;
-    --text-muted: #94A3B8;
-    --border:     #1E2D45;
-    --shadow:     rgba(0,0,0,0.4);
+.card:hover {
+  transform: translateY(-4px); /* lifts the card up 4px */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* bigger shadow */
+}
+```
+
+`transform` is special — it doesn't affect other elements' positions, so it's smooth and fast.
+
+Common transforms:
+```css
+transform: translateY(-4px);  /* move up 4px */
+transform: translateX(10px);  /* move right 10px */
+transform: scale(1.05);       /* make 5% bigger */
+transform: rotate(45deg);     /* rotate 45 degrees */
+```
+
+---
+
+**Keyframe animations — play automatically**
+
+For animations that play without user interaction (like a spinner):
+
+```css
+/* Step 1: define the animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Step 2: apply it */
+.loader {
+  width: 32px;
+  height: 32px;
+  border: 4px solid lightgrey;
+  border-top-color: blue;
+  border-radius: 50%; /* makes it a circle */
+  animation: spin 1s linear infinite; /* name | duration | timing | repeat */
+}
+```
+
+---
+
+```css
+/* Fade in and float up — great for page sections */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Smooth transition when toggling */
+.section {
+  animation: fadeUp 500ms ease-out;
+}
+```
+
+---
+
+**Try it yourself!**
+
+1. Add a hover effect to your cards:
+   - Lift up with `translateY(-4px)`
+   - Add a bigger shadow
+   - Change the transition duration and see how it feels
+
+2. Build a loading spinner using `@keyframes spin` and `border-radius: 50%`. Make it spin infinitely.
+
+3. Make your page sections fade up when they appear using `@keyframes fadeUp`.
+
+---
+
+### Lesson 3.3 — Dark Mode
+
+Dark mode is when the website switches to a dark background with light text. Many people prefer it at night. Here's how to build it.
+
+**The idea**
+
+Instead of writing colours directly in your CSS, you use variables. Then you just swap the variable values when dark mode is on.
+
+```css
+/* Light mode colours (default) */
+:root {
+  --bg:   #FFFFFF;   /* white background */
+  --text: #1C1C1C;   /* almost-black text */
+  --card: #F5F7FA;   /* light grey card */
+}
+
+/* Dark mode colours — only when data-theme="dark" is set on <html> */
+[data-theme="dark"] {
+  --bg:   #0D1117;   /* very dark background */
+  --text: #E6EDF3;   /* light text */
+  --card: #161B22;   /* dark card */
+}
+
+/* Use the variables everywhere */
 body {
   background: var(--bg);
   color: var(--text);
-  transition: background 300ms ease, color 300ms ease;
+  transition: background 300ms, color 300ms; /* smooth switch */
+}
+
+.card {
+  background: var(--card);
 }
 ```
 
-The JavaScript toggle persists the user's choice to `localStorage`:
+**The JavaScript toggle:**
 
 ```javascript
-const root   = document.documentElement;
-const toggle = document.querySelector('#theme-toggle');
+const toggleBtn = document.querySelector('#theme-toggle');
+const html = document.documentElement; // this is the <html> element
 
-const saved = localStorage.getItem('theme');
-if (saved) root.setAttribute('data-theme', saved);
-updateToggleLabel();
-
-toggle.addEventListener('click', () => {
-  const current = root.getAttribute('data-theme');
-  const next    = current === 'dark' ? 'light' : 'dark';
-  root.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  updateToggleLabel();
+toggleBtn.addEventListener('click', () => {
+  // If dark mode is on, switch to light — and vice versa
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light'); // remember the choice
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  }
 });
 
-function updateToggleLabel() {
-  const isDark = root.getAttribute('data-theme') === 'dark';
-  toggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-  toggle.setAttribute('aria-label',
-    isDark ? 'Switch to light mode' : 'Switch to dark mode');
+// When the page loads, use the saved choice
+const saved = localStorage.getItem('theme');
+if (saved) {
+  html.setAttribute('data-theme', saved);
 }
 ```
 
-**Exercises:**
+---
 
-1. Add a fully working dark/light toggle to your bio page. The correct theme should load on refresh. The toggle button must have an accessible `aria-label`.
-2. Audit your dark theme: check every text/background combination passes WCAG AA (4.5:1 for normal text). Fix any failures.
+**Try it yourself!**
 
-## Module 4 — CSS Architecture
+1. Add CSS variables for light and dark colours to your bio page
+2. Add a toggle button in your navigation
+3. Wire up the JavaScript to switch themes on click
+4. Refresh the page — the chosen theme should still be active
 
-Write CSS that stays maintainable as the project grows.
+---
 
-### Lesson 4.1 — CSS Reset and Base Styles
+## Module 4 — Keeping Your CSS Tidy
 
-**Modern CSS reset:**
+### Lesson 4.1 — The CSS Reset
+
+Different browsers have different default styles. Chrome might add different margins to headings than Firefox. A **CSS reset** removes all of these differences so you start from the same place everywhere.
+
+Paste this at the very top of your CSS file (before any of your own styles):
 
 ```css
-/* reset.css */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* === RESET — paste this in every project === */
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-  hanging-punctuation: first last;
+/* 1. Fix the box model for all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* 2. Sensible base for the whole page */
 body {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text);
-  background: var(--bg);
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
+  min-height: 100vh;       /* at least as tall as the screen */
+  line-height: 1.6;        /* comfortable reading */
+  -webkit-font-smoothing: antialiased; /* smoother text on Mac */
 }
 
-img, picture, video, canvas, svg {
+/* 3. Images should never overflow their container */
+img, video {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select { font: inherit; }
+/* 4. Form elements should use the same font as the page */
+input, button, textarea, select {
+  font: inherit;
+}
 
-p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
-
-a { color: inherit; text-decoration: none; }
-
-ul, ol { list-style: none; }
-
-button { cursor: pointer; background: none; border: none; }
-
+/* 5. Show a visible focus ring when navigating with a keyboard */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid blue;
   outline-offset: 2px;
 }
 ```
 
-**Recommended file organisation:**
+---
+
+### Lesson 4.2 — Organising Your Files
+
+When your project gets bigger, one huge CSS file becomes hard to manage. Split it into smaller files by topic:
 
 ```
 styles/
-├── base/
-│   ├── reset.css         ← normalize browser defaults
-│   ├── tokens.css        ← CSS custom properties
-│   └── typography.css    ← base text styles
-├── components/
-│   ├── button.css
-│   ├── card.css
-│   ├── nav.css
-│   └── form.css
-├── layout/
-│   ├── header.css
-│   ├── footer.css
-│   └── grid.css
-├── pages/
-│   └── home.css
-└── main.css              ← @import all the above
+├── reset.css         ← the reset above
+├── variables.css     ← all your :root CSS variables
+├── typography.css    ← fonts and text styles
+├── buttons.css       ← button styles
+├── cards.css         ← card styles
+├── nav.css           ← navigation styles
+├── layout.css        ← page layout (header, footer, grid)
+└── main.css          ← imports all the above files
 ```
 
-**Exercises:**
+In `main.css`, import them all in order:
 
-1. Refactor your bio page CSS into the file structure above. Create separate files for tokens, reset, components (card, button, nav), and layout. Import them all in `main.css`.
+```css
+/* main.css */
+@import './reset.css';
+@import './variables.css';
+@import './typography.css';
+@import './buttons.css';
+@import './cards.css';
+@import './nav.css';
+@import './layout.css';
+```
 
-### Lesson 4.2 — Module Review and Checklist
+Then in your HTML, you only need to link one file:
 
-**Pre-project CSS checklist:**
+```html
+<link rel="stylesheet" href="styles/main.css">
+```
 
-- `box-sizing: border-box` applied globally
-- CSS custom properties for colours, fonts, spacing, and radii
-- All selectors use classes — no styling via IDs
-- No `!important` used
-- Mobile-first: base styles for mobile, media queries for larger screens
-- Flexbox used for component-level layouts
-- CSS Grid used for page-level layouts
-- Transitions on interactive elements (hover, focus) — all 200ms ease
-- Animations use only `transform` and `opacity`
-- `prefers-reduced-motion` media query disables motion
-- Dark/light theme with `data-theme` attribute and localStorage
-- CSS files organised by responsibility
-- Lighthouse Performance score ≥ 90 (no unused CSS, no render-blocking)
+> **Why organise this way?** When something looks wrong with a button, you know exactly which file to open. It saves time and makes it easier for others to help you.
 
-**Exercises:**
+---
 
-1. Apply the full checklist to your bio page. Document each item as Pass / Fail. Fix all failures before moving on.
-2. Share your CSS file structure in the community. Get feedback on organisation. Refactor based on one piece of feedback you receive.
+### Lesson 4.3 — Course Checklist
+
+Before you move on, make sure your bio page does all of these things:
+
+**Basics**
+- [ ] `box-sizing: border-box` is at the top of your CSS
+- [ ] All colours and sizes are stored as CSS variables in `:root`
+- [ ] No messy hardcoded colours typed directly in rules (use `var()`)
+
+**Layout**
+- [ ] The page works and looks good on a phone (test in DevTools)
+- [ ] Flexbox is used for at least one component (navigation, card row, etc.)
+- [ ] CSS Grid is used for at least one layout (card gallery or page structure)
+
+**Visual polish**
+- [ ] Buttons and cards have a smooth hover effect with `transition`
+- [ ] At least one `@keyframes` animation is used
+- [ ] `prefers-reduced-motion` turns off animations for users who need it
+
+**Dark mode**
+- [ ] There is a working dark/light toggle button
+- [ ] The chosen theme is saved and restored on page refresh
+
+**Files**
+- [ ] CSS is split into at least 3 separate files (variables, reset, and components)
+- [ ] All files are imported in `main.css`
+
+---
+
+**Final project**
+
+Build a personal bio page from scratch that passes the checklist above. It should include:
+1. A navigation bar with your name/logo on the left and links on the right
+2. A hero section with your name and a short description, centred on the page
+3. A "Skills" or "Hobbies" card grid that reflows on different screen sizes
+4. A dark/light mode toggle
+5. Hover animations on all cards and buttons
+
+Share your finished page with someone and ask them to resize the browser window. If everything reflows nicely, you've done it!
